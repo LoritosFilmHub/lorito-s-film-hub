@@ -1,0 +1,2084 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorito's Film Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            position: relative;
+            min-height: 100vh;
+            background: url('JmkXVTnNxCucpkQj6A2mq') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        .container {
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: url('xXTOggNlSTwCBHULxlzom') no-repeat center center;
+            background-size: cover;
+            border-radius: 15px;
+            border: 3px solid #ff0000;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ff0000;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .categories {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .category {
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .category:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .category h2 {
+            color: #ff0000;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .movie-grid {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: #ff0000 #333;
+        }
+
+        .movie-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .movie-grid::-webkit-scrollbar-track {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        .movie-grid::-webkit-scrollbar-thumb {
+            background: #ff0000;
+            border-radius: 4px;
+        }
+
+        .movie-grid::-webkit-scrollbar-thumb:hover {
+            background: #cc0000;
+        }
+
+        .movie-card {
+            background: rgba(34, 34, 34, 0.9);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+            min-width: 200px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .movie-card:hover {
+            background: rgba(51, 51, 51, 0.9);
+            transform: scale(1.05);
+            z-index: 10;
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.3);
+        }
+
+        .movie-card h3 {
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .movie-card p {
+            color: #ccc;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .movie-card button {
+            background: #ff0000;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .movie-card button:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            border-top: 2px solid #ff0000;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .footer p {
+            color: #ccc;
+            font-size: 1rem;
+        }
+
+        .movie-page {
+            display: none;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .movie-page.active {
+            display: block;
+        }
+
+        .movie-header {
+            margin-bottom: 20px;
+        }
+
+        .movie-page h1 {
+            color: #ff0000;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+        }
+
+        .player-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            margin: 25px 0;
+            border: 3px solid #ff0000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .player-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            z-index: 10;
+            display: flex;
+            gap: 10px;
+        }
+
+        .cc-button {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: 2px solid #ff0000;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .cc-button:hover {
+            background: rgba(255, 0, 0, 0.8);
+            transform: scale(1.05);
+        }
+
+        .cc-button.active {
+            background: #ff0000;
+            color: white;
+        }
+
+        .subtitle-overlay {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            max-width: 80%;
+            z-index: 5;
+            display: none;
+            line-height: 1.4;
+        }
+
+        .subtitle-overlay.show {
+            display: block;
+        }
+
+        .movie-info {
+            background: #111;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .btn-voltar {
+            background: #ff0000;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-voltar:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+        }
+
+        .signup-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .signup-content {
+            background-color: #111;
+            margin: 5% auto;
+            padding: 30px;
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            color: white;
+        }
+
+        .close {
+            color: #ff0000;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #cc0000;
+        }
+
+        .signup-form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff0000;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+
+        .captcha-container {
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .captcha-question {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #ff0000;
+        }
+
+        .captcha-input {
+            width: 100px;
+            padding: 8px;
+            border: 1px solid #333;
+            border-radius: 3px;
+            background: #111;
+            color: white;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #ff0000;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .signup-btn {
+            background: #ff0000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-left: 20px;
+        }
+
+        .signup-btn:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+        }
+
+        .verification-section {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .verification-code {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff0000;
+            background: #222;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border: 2px solid #ff0000;
+        }
+
+        .success-message {
+            color: #00ff00;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .error-message {
+            color: #ff0000;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .admin-panel {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            overflow-y: auto;
+        }
+
+        .admin-content {
+            background-color: #111;
+            margin: 2% auto;
+            padding: 30px;
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            width: 95%;
+            max-width: 1000px;
+            color: white;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ff0000;
+            padding-bottom: 15px;
+        }
+
+        .admin-login {
+            text-align: center;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 50px 0;
+        }
+
+        .admin-dashboard {
+            display: none;
+        }
+
+        .user-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .user-table th,
+        .user-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .user-table th {
+            background-color: #ff0000;
+            color: white;
+            font-weight: bold;
+        }
+
+        .user-table tr:hover {
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #222;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ff0000;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #ccc;
+            margin-top: 10px;
+        }
+
+        .admin-btn {
+            background: #ff0000;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 5px;
+            font-size: 14px;
+        }
+
+        .admin-btn:hover {
+            background: #cc0000;
+        }
+
+        .admin-btn.danger {
+            background: #dc3545;
+        }
+
+        .admin-btn.danger:hover {
+            background: #c82333;
+        }
+
+        .admin-access-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        .admin-access-btn:hover {
+            background: #cc0000;
+            transform: scale(1.1);
+        }
+
+        .payment-info {
+            background: #222;
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            color: white;
+        }
+
+        .payment-method {
+            background: #333;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #ff0000;
+        }
+
+        .payment-method h4 {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+
+        .payment-data {
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .copy-btn {
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background: #cc0000;
+        }
+
+        .payment-warning {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff0000;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .commercial-section {
+            background: rgba(17, 17, 17, 0.95);
+            border: 2px solid #ff0000;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .commercial-section h2 {
+            color: #ff0000;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .commercial-grid {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scrollbar-width: thin;
+            scrollbar-color: #ff0000 #333;
+        }
+
+        .commercial-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .commercial-grid::-webkit-scrollbar-track {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        .commercial-grid::-webkit-scrollbar-thumb {
+            background: #ff0000;
+            border-radius: 4px;
+        }
+
+        .commercial-card {
+            background: rgba(34, 34, 34, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            min-width: 280px;
+            flex-shrink: 0;
+            border: 2px solid #333;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .commercial-card:hover {
+            transform: scale(1.05);
+            border-color: #ff0000;
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.3);
+        }
+
+        .commercial-video {
+            width: 100%;
+            height: 160px;
+            border-radius: 8px;
+            border: 2px solid #ff0000;
+            margin-bottom: 15px;
+        }
+
+        .commercial-card h3 {
+            color: #ff0000;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .commercial-card p {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .commercial-contact {
+            background: #ff0000;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .commercial-contact:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+        }
+
+        .sponsor-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff0000;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border: 2px solid white;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .categories {
+                gap: 25px;
+            }
+            
+            .movie-grid {
+                gap: 12px;
+            }
+            
+            .category h2 {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+            
+            .movie-card {
+                min-width: 160px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="catalog" class="container">
+        <div class="header">
+            <div class="logo"></div>
+            <h1>LORITO'S FILM HUB</h1>
+            <p class="subtitle">Seu destino para os melhores filmes</p>
+            <button class="signup-btn" onclick="openSignupModal()">💎 Cadastrar-se no Plano Premium - R$ 7,00 + R$ 5,00/mês</button>
+        </div>
+
+        <div class="categories">
+            <div class="category">
+                <h2>🎃 TERROR</h2>
+                <div class="movie-grid">
+                    <div class="movie-card">
+                        <h3>O Exorcista</h3>
+                        <p>Clássico do terror (1973)</p>
+                        <button onclick="showMovie('exorcista')">Assistir</button>
+                    </div>
+                    <div class="movie-card">
+                        <h3>A Bruxa</h3>
+                        <p>Terror psicológico (2015)</p>
+                        <button onclick="showMovie('bruxa')">Assistir</button>
+                    </div>
+                    <div class="movie-card">
+                        <h3>Hereditário</h3>
+                        <p>Horror sobrenatural (2018)</p>
+                        <button onclick="showMovie('hereditario')">Assistir</button>
+                    </div>
+                    <div class="movie-card">
+                        <h3>O Chamado</h3>
+                        <p>Terror japonês (2002)</p>
+                        <button onclick="showMovie('chamado')">Assistir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h2>💥 AÇÃO</h2>
+                <div class="movie-grid">
+                    <div class="movie-card">
+                        <h3>John Wick</h3>
+                        <p>Ação/Thriller (2014)</p>
+                        <button onclick="showMovie('johnwick')">Assistir</button>
+                    </div>
+                    <div class="movie-card">
+                        <h3>Mad Max: Fury Road</h3>
+                        <p>Ação/Ficção (2015)</p>
+                        <button onclick="showMovie('madmax')">Assistir</button>
+                    </div>
+                    <div class="movie-card">
+                        <h3>Deadpool</h3>
+                        <p>Ação/Comédia (2016)</p>
+                        <button onclick="showMovie('deadpool')">Assistir</button>
+                    </div>
+                    <div class="movie-card">
+                        <h3>Vingadores</h3>
+                        <p>Ação/Aventura (2012)</p>
+                        <button onclick="showMovie('vingadores')">Assistir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h2>🎭 DRAMA</h2>
+                <div class="movie-grid">
+                    <div class="movie-card">
+                        <h3>Parasita</h3>
+                        <p>Drama/Thriller (2019)</p>
+                        <button onclick="showMovie('parasita')">Assistir</button>
+                    </div>
+                    <div class="movie-card">
+                        <h3>Cidade de Deus</h3>
+                        <p>Drama brasileiro (2002)</p>
+                        <button onclick="showMovie('cidadedeus')">Assistir</button>
+                    </div>
+                    <div class="movie-card">
+                        <h3>Coringa</h3>
+                        <p>Drama/Crime (2019)</p>
+                        <button onclick="showMovie('coringa')">Assistir</button>
+                    </div>
+                    <div class="movie-card">
+                        <h3>O Poderoso Chefão</h3>
+                        <p>Drama/Crime (1972)</p>
+                        <button onclick="showMovie('chefao')">Assistir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h2>🚀 FICÇÃO CIENTÍFICA</h2>
+                <div class="movie-grid">
+                    <div class="movie-card">
+                        <h3>Blade Runner 2049</h3>
+                        <p>Ficção/Drama (2017)</p>
+                        <button onclick="showMovie('bladerunner')">Assistir</button>
+                    </div>
+                    <div class="movie-card">
+                        <h3>Matrix</h3>
+                        <p>Ficção/Ação (1999)</p>
+                        <button onclick="showMovie('matrix')">Assistir</button>
+                    </div>
+                    <div class="movie-card">
+                        <h3>Interestelar</h3>
+                        <p>Ficção/Drama (2014)</p>
+                        <button onclick="showMovie('interestelar')">Assistir</button>
+                    </div>
+                    <div class="movie-card">
+                        <h3>Alien</h3>
+                        <p>Ficção/Terror (1979)</p>
+                        <button onclick="showMovie('alien')">Assistir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Vídeos Comerciais -->
+        <div class="commercial-section">
+            <h2>🎬 PATROCINADORES & PARCEIROS</h2>
+            <p style="color: #ccc; margin-bottom: 25px; font-size: 1.1rem;">
+                Conheça nossos parceiros e suas ofertas especiais!
+            </p>
+            
+            <div class="commercial-grid" id="commercialGrid">
+                <!-- Exemplo de propaganda 1 -->
+                <div class="commercial-card">
+                    <div class="sponsor-badge">🌟 DESTAQUE</div>
+                    <iframe class="commercial-video" 
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ?modestbranding=1&rel=0&showinfo=0" 
+                        frameborder="0" allowfullscreen>
+                    </iframe>
+                    <h3>Loja Tech Master</h3>
+                    <p>Os melhores produtos de tecnologia com desconto exclusivo para assinantes do Lorito's Film Hub!</p>
+                    <a href="#" class="commercial-contact" onclick="contactSponsor('tech')">📱 Entrar em Contato</a>
+                </div>
+
+                <!-- Exemplo de propaganda 2 -->
+                <div class="commercial-card">
+                    <div class="sponsor-badge">💎 PREMIUM</div>
+                    <iframe class="commercial-video" 
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ?modestbranding=1&rel=0&showinfo=0" 
+                        frameborder="0" allowfullscreen>
+                    </iframe>
+                    <h3>Pizzaria do João</h3>
+                    <p>As melhores pizzas da cidade! Desconto especial para quem mencionar o Lorito's Film Hub.</p>
+                    <a href="#" class="commercial-contact" onclick="contactSponsor('pizza')">🍕 Ver Cardápio</a>
+                </div>
+
+                <!-- Exemplo de propaganda 3 -->
+                <div class="commercial-card">
+                    <div class="sponsor-badge">🚀 NOVO</div>
+                    <iframe class="commercial-video" 
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ?modestbranding=1&rel=0&showinfo=0" 
+                        frameborder="0" allowfullscreen>
+                    </iframe>
+                    <h3>Academia Força Total</h3>
+                    <p>Transforme seu corpo! Mensalidade com 50% de desconto para assinantes premium.</p>
+                    <a href="#" class="commercial-contact" onclick="contactSponsor('academia')">💪 Saiba Mais</a>
+                </div>
+
+                <!-- Slot para mais propagandas -->
+                <div class="commercial-card" style="border: 2px dashed #ff0000; opacity: 0.7;">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: #ff0000;">
+                        <h3 style="margin-bottom: 15px;">🎯 SEU ANÚNCIO AQUI</h3>
+                        <p style="text-align: center; margin-bottom: 20px;">
+                            Divulgue seu negócio para milhares de espectadores!
+                        </p>
+                        <a href="#" class="commercial-contact" onclick="contactForAdvertising()">📞 Anunciar Aqui</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; padding: 15px; background: rgba(255,0,0,0.1); border-radius: 8px;">
+                <p style="color: #ff0000; font-weight: bold; margin: 0;">
+                    💼 Quer anunciar aqui? Entre em contato e alcance milhares de clientes!
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Lorito's Film Hub. Todos os direitos reservados.</p>
+            <p>Desenvolvido com ❤️ para amantes do cinema</p>
+        </div>
+    </div>
+
+    <div id="moviePage" class="movie-page">
+        <div class="movie-header">
+            <h1 id="movieTitle"></h1>
+            <p id="movieDirector"></p>
+        </div>
+
+        <div class="player-wrapper">
+            <iframe id="movieTrailer" frameborder="0" allowfullscreen></iframe>
+            <div class="video-controls">
+                <button class="cc-button" id="ccButton" onclick="toggleSubtitles()">
+                    CC 📝
+                </button>
+                <button class="cc-button" onclick="changeSubtitleLanguage()">
+                    🌐 PT
+                </button>
+            </div>
+            <div class="subtitle-overlay" id="subtitleOverlay"></div>
+        </div>
+
+        <div class="movie-info">
+            <p id="movieSynopsis"></p>
+            <p id="movieDuration"></p>
+            <p><strong>Classificação:</strong> ★★★★☆</p>
+        </div>
+
+        <button class="btn-voltar" onclick="backToCatalog()">← Voltar ao Catálogo</button>
+    </div>
+
+    <!-- Modal de Cadastro -->
+    <div id="signupModal" class="signup-modal">
+        <div class="signup-content">
+            <span class="close" onclick="closeSignupModal()">&times;</span>
+            <h2 style="color: #ff0000; text-align: center; margin-bottom: 20px;">Cadastro no Plano Premium</h2>
+            <div style="text-align: center; margin-bottom: 20px; padding: 15px; background: rgba(255,0,0,0.1); border: 1px solid #ff0000; border-radius: 8px;">
+                <h3 style="color: #ff0000; margin: 0;">💰 Plano de Pagamento</h3>
+                <p style="color: #fff; margin: 10px 0; font-size: 1.1rem;">
+                    <strong>1ª Parcela:</strong> R$ 7,00<br>
+                    <strong>Mensalidade:</strong> R$ 5,00/mês
+                </p>
+                <p style="color: #ccc; font-size: 0.9rem; margin: 0;">Acesso vitalício com pequena mensalidade de manutenção</p>
+            </div>
+            
+            <form id="signupForm" class="signup-form">
+                <div class="form-group">
+                    <label for="name">Nome Completo:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmEmail">Confirmar E-mail:</label>
+                    <input type="email" id="confirmEmail" name="confirmEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Telefone:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <!-- Verificação Humana -->
+                <div class="captcha-container">
+                    <div class="captcha-question" id="captchaQuestion">Quanto é 5 + 3?</div>
+                    <input type="number" id="captchaAnswer" class="captcha-input" placeholder="Resposta" required>
+                </div>
+                
+                <button type="submit" class="btn-primary">Cadastrar-se</button>
+                
+                <div id="errorMessage" class="error-message"></div>
+                <div id="successMessage" class="success-message"></div>
+            </form>
+            
+            <!-- Seção de Verificação -->
+            <div id="verificationSection" class="verification-section">
+                <h3 style="color: #ff0000;">Verificação de E-mail</h3>
+                <p>Um código de verificação foi enviado para seu e-mail:</p>
+                <div id="verificationCode" class="verification-code">ABC123</div>
+                <p>Digite o código acima para confirmar seu cadastro:</p>
+                
+                <div class="form-group">
+                    <input type="text" id="verificationInput" placeholder="Digite o código" style="text-align: center;">
+                </div>
+                
+                <button onclick="verifyCode()" class="btn-primary">Verificar Código</button>
+                <button onclick="resendCode()" class="btn-primary" style="background: #666; margin-top: 10px;">Reenviar Código</button>
+                
+                <div id="verificationMessage" class="success-message"></div>
+            </div>
+
+            <!-- Seção de Pagamento -->
+            <div id="paymentSection" class="payment-info" style="display: none;">
+                <h3 style="color: #ff0000; text-align: center; margin-bottom: 20px;">💳 Informações de Pagamento</h3>
+                <div style="text-align: center; margin-bottom: 20px; padding: 15px; background: rgba(255,0,0,0.1); border: 1px solid #ff0000; border-radius: 8px;">
+                    <h4 style="color: #ff0000; margin: 0;">Valores do Plano Premium:</h4>
+                    <p style="color: #fff; margin: 10px 0; font-size: 1.1rem;">
+                        <strong>🎯 Primeira Parcela:</strong> R$ 7,00<br>
+                        <strong>📅 Mensalidade:</strong> R$ 5,00/mês
+                    </p>
+                </div>
+                
+                <div class="payment-warning">
+                    ⚠️ IMPORTANTE: Pague apenas a primeira parcela de R$ 7,00 para ativar o plano. A mensalidade de R$ 5,00 será cobrada a partir do próximo mês. Após realizar o pagamento, envie o comprovante para confirmação da ativação.
+                </div>
+
+                <div class="payment-method">
+                    <h4>🏦 Transferência Bancária (Nubank)</h4>
+                    <div class="payment-data">
+                        <strong>Valor (1ª Parcela):</strong> R$ 7,00<br>
+                        <strong>Banco:</strong> 0260 - Nubank<br>
+                        <strong>Agência:</strong> 0001<br>
+                        <strong>Conta:</strong> 46574696-6<br>
+                        <strong>Titular:</strong> RODRIGO ELIAS DE BRITO
+                        <button class="copy-btn" onclick="copyBankData()">📋 Copiar</button>
+                    </div>
+                </div>
+
+                <div class="payment-method">
+                    <h4>📱 PIX</h4>
+                    <div class="payment-data">
+                        <strong>Valor (1ª Parcela):</strong> R$ 7,00<br>
+                        <strong>Chave PIX:</strong> 1c814ae7-453e-470d-a9b4-9b26f1589d1a<br>
+                        <strong>Titular:</strong> RODRIGO ELIAS DE BRITO
+                        <button class="copy-btn" onclick="copyPixKey()">📋 Copiar Chave</button>
+                    </div>
+                </div>
+
+                <div class="payment-method">
+                    <h4>💳 Cartão de Crédito/Débito</h4>
+                    <div class="payment-data">
+                        <strong>Valor (1ª Parcela):</strong> R$ 7,00<br>
+                        <strong>Aceita:</strong> Todos os cartões (Visa, Mastercard, Elo, etc.)<br>
+                        <strong>Modalidades:</strong> Crédito e Débito<br>
+                        <em>Entre em contato para processar pagamento via cartão</em>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button onclick="confirmPayment()" class="btn-primary">✅ Já Realizei o Pagamento</button>
+                    <button onclick="closePaymentSection()" class="btn-primary" style="background: #666; margin-top: 10px;">❌ Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Painel Administrativo -->
+    <div id="adminPanel" class="admin-panel">
+        <div class="admin-content">
+            <!-- Login Admin -->
+            <div id="adminLogin" class="admin-login">
+                <h2 style="color: #ff0000; margin-bottom: 30px;">🔐 Acesso Administrativo</h2>
+                <div class="form-group">
+                    <label for="adminPassword">Senha do Administrador:</label>
+                    <input type="password" id="adminPassword" placeholder="Digite a senha" style="text-align: center;">
+                </div>
+                <button onclick="adminLogin()" class="btn-primary">Entrar</button>
+                <button onclick="closeAdminPanel()" class="btn-primary" style="background: #666; margin-top: 10px;">Cancelar</button>
+                <div id="adminError" class="error-message"></div>
+            </div>
+
+            <!-- Dashboard Admin -->
+            <div id="adminDashboard" class="admin-dashboard">
+                <div class="admin-header">
+                    <h2 style="color: #ff0000; margin: 0;">📊 Painel Administrativo - Lorito's Film Hub</h2>
+                    <button onclick="logoutAdmin()" class="admin-btn danger">Sair</button>
+                </div>
+
+                <!-- Estatísticas -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalUsers">0</div>
+                        <div class="stat-label">Total de Usuários</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="verifiedUsers">0</div>
+                        <div class="stat-label">Usuários Verificados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="premiumUsers">0</div>
+                        <div class="stat-label">Planos Premium</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="todayRegistrations">0</div>
+                        <div class="stat-label">Cadastros Hoje</div>
+                    </div>
+                </div>
+
+                <!-- Ações Administrativas -->
+                <div style="margin-bottom: 20px;">
+                    <button onclick="exportUserData()" class="admin-btn">📥 Exportar Dados</button>
+                    <button onclick="clearAllUsers()" class="admin-btn danger">🗑️ Limpar Todos os Dados</button>
+                    <button onclick="refreshStats()" class="admin-btn">🔄 Atualizar</button>
+                </div>
+
+                <!-- Tabela de Usuários -->
+                <h3 style="color: #ff0000; margin-bottom: 15px;">👥 Usuários Cadastrados</h3>
+                <div style="overflow-x: auto;">
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Telefone</th>
+                                <th>Status</th>
+                                <th>Plano</th>
+                                <th>Data de Cadastro</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            <tr>
+                                <td colspan="7" style="text-align: center; color: #666;">Nenhum usuário cadastrado ainda</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão de Acesso Admin -->
+    <button class="admin-access-btn" onclick="openAdminPanel()" title="Acesso Administrativo">⚙️</button>
+
+    <script>
+        const movies = {
+            'exorcista': {
+                title: 'O Exorcista',
+                year: '1973',
+                director: 'William Friedkin',
+                synopsis: 'Uma jovem é possuída por uma entidade demoníaca, e sua mãe procura a ajuda de dois padres para salvá-la.',
+                trailer: 'https://www.youtube.com/embed/YDGw1MTEe9k?cc_load_policy=1&cc_lang_pref=pt&modestbranding=1&rel=0&showinfo=0',
+                duration: '2h 2min',
+                subtitles: {
+                    pt: [
+                        { time: 0, text: "🎬 O Exorcista - Trailer Legendado" },
+                        { time: 5, text: "Uma das histórias mais aterrorizantes já contadas..." },
+                        { time: 15, text: "Quando o mal toma conta de uma criança inocente..." },
+                        { time: 30, text: "Apenas a fé pode salvá-la..." }
+                    ]
+                }
+            },
+            'bruxa': {
+                title: 'A Bruxa',
+                year: '2015',
+                director: 'Robert Eggers',
+                synopsis: 'Nova Inglaterra, década de 1630. Uma família puritana enfrenta eventos sobrenaturais após serem banidos de sua comunidade.',
+                trailer: 'https://www.youtube.com/embed/iQXmlf3Sefg?cc_load_policy=1&cc_lang_pref=pt&modestbranding=1&rel=0&showinfo=0',
+                duration: '1h 32min',
+                subtitles: {
+                    pt: [
+                        { time: 0, text: "🎬 A Bruxa - Trailer Legendado" },
+                        { time: 5, text: "Nova Inglaterra, 1630..." },
+                        { time: 15, text: "Uma família enfrenta forças sobrenaturais..." },
+                        { time: 30, text: "O mal está à espreita na floresta..." }
+                    ]
+                }
+            },
+            'hereditario': {
+                title: 'Hereditário',
+                year: '2018',
+                director: 'Ari Aster',
+                synopsis: 'Após a morte da avó, uma família começa a desvendar segredos aterrorizantes sobre sua ancestralidade.',
+                trailer: 'https://www.youtube.com/embed/V6wWKNij_1M?cc_load_policy=1&cc_lang_pref=pt&modestbranding=1&rel=0&showinfo=0',
+                duration: '2h 7min',
+                subtitles: {
+                    pt: [
+                        { time: 0, text: "🎬 Hereditário - Trailer Legendado" },
+                        { time: 5, text: "Quando a matriarca da família morre..." },
+                        { time: 15, text: "Segredos sombrios são revelados..." },
+                        { time: 30, text: "O terror está na família..." }
+                    ]
+                }
+            },
+            'chamado': {
+                title: 'O Chamado',
+                year: '2002',
+                director: 'Gore Verbinski',
+                synopsis: 'Uma jornalista investiga uma fita de vídeo amaldiçoada que mata quem a assiste em sete dias.',
+                trailer: 'https://www.youtube.com/embed/yzQ3ToMZmb4?cc_load_policy=1&cc_lang_pref=pt&modestbranding=1&rel=0&showinfo=0',
+                duration: '1h 55min',
+                subtitles: {
+                    pt: [
+                        { time: 0, text: "🎬 O Chamado - Trailer Legendado" },
+                        { time: 5, text: "Existe uma fita que mata..." },
+                        { time: 15, text: "Você tem 7 dias para viver..." },
+                        { time: 30, text: "O telefone vai tocar..." }
+                    ]
+                }
+            },
+            'johnwick': {
+                title: 'John Wick',
+                year: '2014',
+                director: 'Chad Stahelski',
+                synopsis: 'Um ex-assassino sai da aposentadoria para vingar a morte de seu cachorro.',
+                trailer: 'https://www.youtube.com/embed/C0BMx-qxsP4?cc_load_policy=1&cc_lang_pref=pt&modestbranding=1&rel=0&showinfo=0',
+                duration: '1h 41min',
+                subtitles: {
+                    pt: [
+                        { time: 0, text: "🎬 John Wick - Trailer Legendado" },
+                        { time: 5, text: "Ele era o melhor assassino..." },
+                        { time: 15, text: "Agora eles mataram seu cachorro..." },
+                        { time: 30, text: "John Wick está de volta..." }
+                    ]
+                }
+            },
+            'madmax': {
+                title: 'Mad Max: Fury Road',
+                year: '2015',
+                director: 'George Miller',
+                synopsis: 'Em um mundo pós-apocalíptico, Max se une a Furiosa para escapar de um tirano.',
+                trailer: 'https://www.youtube.com/embed/hEJnMQG9ev8?cc_load_policy=1&cc_lang_pref=pt&modestbranding=1&rel=0&showinfo=0',
+                duration: '2h',
+                subtitles: {
+                    pt: [
+                        { time: 0, text: "🎬 Mad Max: Fury Road - Trailer Legendado" },
+                        { time: 5, text: "No mundo pós-apocalíptico..." },
+                        { time: 15, text: "A única regra é sobreviver..." },
+                        { time: 30, text: "A estrada é nossa salvação..." }
+                    ]
+                }
+            },
+            'deadpool': {
+                title: 'Deadpool',
+                year: '2016',
+                director: 'Tim Miller',
+                synopsis: 'Wade Wilson se torna o anti-herói Deadpool após um experimento que o desfigura.',
+                trailer: 'https://www.youtube.com/embed/ONHBaC-pfsk?cc_load_policy=1&cc_lang_pref=pt&modestbranding=1&rel=0&showinfo=0',
+                duration: '1h 48min',
+                subtitles: {
+                    pt: [
+                        { time: 0, text: "🎬 Deadpool - Trailer Legendado" },
+                        { time: 5, text: "Ele não é seu herói típico..." },
+                        { time: 15, text: "Com grande poder vem... irresponsabilidade total!" },
+                        { time: 30, text: "O anti-herói que você merece..." }
+                    ]
+                }
+            },
+            'vingadores': {
+                title: 'Vingadores',
+                year: '2012',
+                director: 'Joss Whedon',
+                synopsis: 'Os maiores super-heróis da Terra se unem para combater uma ameaça alienígena.',
+                trailer: 'https://www.youtube.com/embed/eOrNdBpGMv8?cc_load_policy=1&cc_lang_pref=pt&modestbranding=1&rel=0&showinfo=0',
+                duration: '2h 23min',
+                subtitles: {
+                    pt: [
+                        { time: 0, text: "🎬 Os Vingadores - Trailer Legendado" },
+                        { time: 5, text: "Os maiores heróis da Terra..." },
+                        { time: 15, text: "Devem se unir para salvar o mundo..." },
+                        { time: 30, text: "Vingadores... Reunir!" }
+                    ]
+                }
+            },
+            'parasita': {
+                title: 'Parasita',
+                year: '2019',
+                director: 'Bong Joon-ho',
+                synopsis: 'Uma família pobre se infiltra na vida de uma família rica com consequências inesperadas.',
+                trailer: 'https://www.youtube.com/embed/5xH0HfJHsaY?modestbranding=1&rel=0&showinfo=0',
+                duration: '2h 12min'
+            },
+            'cidadedeus': {
+                title: 'Cidade de Deus',
+                year: '2002',
+                director: 'Fernando Meirelles',
+                synopsis: 'A história de vida no maior complexo de favelas do Rio de Janeiro.',
+                trailer: 'https://www.youtube.com/embed/dcUOO4Itgmw?modestbranding=1&rel=0&showinfo=0',
+                duration: '2h 10min'
+            },
+            'coringa': {
+                title: 'Coringa',
+                year: '2019',
+                director: 'Todd Phillips',
+                synopsis: 'A origem do icônico vilão do Batman em uma Gotham City sombria.',
+                trailer: 'https://www.youtube.com/embed/zAGVQLHvwOY?modestbranding=1&rel=0&showinfo=0',
+                duration: '2h 2min'
+            },
+            'chefao': {
+                title: 'O Poderoso Chefão',
+                year: '1972',
+                director: 'Francis Ford Coppola',
+                synopsis: 'A saga da família Corleone e o mundo da máfia italiana nos EUA.',
+                trailer: 'https://www.youtube.com/embed/sY1S34973zA?modestbranding=1&rel=0&showinfo=0',
+                duration: '2h 55min'
+            },
+            'bladerunner': {
+                title: 'Blade Runner 2049',
+                year: '2017',
+                director: 'Denis Villeneuve',
+                synopsis: 'Um jovem blade runner descobre um segredo que pode mergulhar a sociedade no caos.',
+                trailer: 'https://www.youtube.com/embed/gCcx85zbxz4?modestbranding=1&rel=0&showinfo=0',
+                duration: '2h 44min'
+            },
+            'matrix': {
+                title: 'Matrix',
+                year: '1999',
+                director: 'Lana Wachowski',
+                synopsis: 'Neo descobre que a realidade é uma simulação e se junta à resistência.',
+                trailer: 'https://www.youtube.com/embed/vKQi3bIA1HI?modestbranding=1&rel=0&showinfo=0',
+                duration: '2h 16min'
+            },
+            'interestelar': {
+                title: 'Interestelar',
+                year: '2014',
+                director: 'Christopher Nolan',
+                synopsis: 'Astronautas viajam através de um buraco de minhoca para salvar a humanidade.',
+                trailer: 'https://www.youtube.com/embed/zSWdZVtXT7E?modestbranding=1&rel=0&showinfo=0',
+                duration: '2h 49min'
+            },
+            'alien': {
+                title: 'Alien',
+                year: '1979',
+                director: 'Ridley Scott',
+                synopsis: 'A tripulação de uma nave espacial enfrenta uma criatura alienígena mortal.',
+                trailer: 'https://www.youtube.com/embed/LjLamj-b0I8?modestbranding=1&rel=0&showinfo=0',
+                duration: '1h 57min'
+            }
+        };
+
+        function showMovie(movieId) {
+            // MODO TESTE - Para você testar o site
+            // Descomente a linha abaixo quando quiser ativar o redirecionamento
+            // window.open('https://tinyurl.com/loritos-film-hub77', '_blank'); return;
+            
+            const movie = movies[movieId];
+            if (!movie) {
+                alert('Filme não encontrado!');
+                return;
+            }
+
+            document.getElementById('movieTitle').textContent = movie.title + ' (' + movie.year + ')';
+            document.getElementById('movieDirector').innerHTML = '<strong>Diretor:</strong> ' + movie.director;
+            document.getElementById('movieSynopsis').innerHTML = '<strong>Sinopse:</strong> ' + movie.synopsis;
+            document.getElementById('movieDuration').innerHTML = '<strong>Duração:</strong> ' + movie.duration;
+            document.getElementById('movieTrailer').src = movie.trailer;
+
+            document.getElementById('catalog').style.display = 'none';
+            document.getElementById('moviePage').style.display = 'block';
+        }
+
+        function backToCatalog() {
+            document.getElementById('catalog').style.display = 'block';
+            document.getElementById('moviePage').style.display = 'none';
+            document.getElementById('movieTrailer').src = '';
+        }
+
+        // Sistema de Cadastro
+        let currentCaptchaAnswer = 8;
+        let generatedCode = '';
+
+        function openSignupModal() {
+            document.getElementById('signupModal').style.display = 'block';
+            generateCaptcha();
+        }
+
+        function closeSignupModal() {
+            document.getElementById('signupModal').style.display = 'none';
+            resetForm();
+        }
+
+        function generateCaptcha() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            const operation = Math.random() > 0.5 ? '+' : '-';
+            
+            let answer;
+            if (operation === '+') {
+                answer = num1 + num2;
+            } else {
+                answer = num1 - num2;
+            }
+            
+            currentCaptchaAnswer = answer;
+            document.getElementById('captchaQuestion').textContent = `Quanto é ${num1} ${operation} ${num2}?`;
+        }
+
+        function generateVerificationCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 6; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const confirmEmail = document.getElementById('confirmEmail').value;
+            const phone = document.getElementById('phone').value;
+            const captchaAnswer = parseInt(document.getElementById('captchaAnswer').value);
+            
+            // Limpar mensagens
+            document.getElementById('errorMessage').textContent = '';
+            document.getElementById('successMessage').textContent = '';
+            
+            // Validações
+            if (!name || !email || !confirmEmail || !phone) {
+                document.getElementById('errorMessage').textContent = 'Por favor, preencha todos os campos.';
+                return;
+            }
+            
+            if (email !== confirmEmail) {
+                document.getElementById('errorMessage').textContent = 'Os e-mails não coincidem.';
+                return;
+            }
+            
+            if (captchaAnswer !== currentCaptchaAnswer) {
+                document.getElementById('errorMessage').textContent = 'Resposta da verificação humana incorreta.';
+                generateCaptcha();
+                document.getElementById('captchaAnswer').value = '';
+                return;
+            }
+            
+            // Validar formato do email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('errorMessage').textContent = 'Por favor, insira um e-mail válido.';
+                return;
+            }
+            
+            // Gerar código de verificação
+            generatedCode = generateVerificationCode();
+            document.getElementById('verificationCode').textContent = generatedCode;
+            
+            // Mostrar seção de verificação
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('verificationSection').style.display = 'block';
+            
+            // Simular envio de email
+            setTimeout(() => {
+                document.getElementById('verificationMessage').textContent = 'Código enviado para ' + email;
+                document.getElementById('verificationMessage').style.color = '#00ff00';
+            }, 1000);
+        });
+
+        function verifyCode() {
+            const inputCode = document.getElementById('verificationInput').value.toUpperCase();
+            const messageDiv = document.getElementById('verificationMessage');
+            
+            if (!inputCode) {
+                messageDiv.textContent = 'Por favor, digite o código de verificação.';
+                messageDiv.style.color = '#ff0000';
+                return;
+            }
+            
+            if (inputCode === generatedCode) {
+                messageDiv.textContent = '✅ Código verificado! Agora escolha a forma de pagamento:';
+                messageDiv.style.color = '#00ff00';
+                
+                // Mostrar seção de pagamento
+                setTimeout(() => {
+                    document.getElementById('verificationSection').style.display = 'none';
+                    document.getElementById('paymentSection').style.display = 'block';
+                }, 1500);
+                
+            } else {
+                messageDiv.textContent = 'Código incorreto. Tente novamente.';
+                messageDiv.style.color = '#ff0000';
+                document.getElementById('verificationInput').value = '';
+            }
+        }
+
+        function resendCode() {
+            generatedCode = generateVerificationCode();
+            document.getElementById('verificationCode').textContent = generatedCode;
+            document.getElementById('verificationMessage').textContent = 'Novo código enviado!';
+            document.getElementById('verificationMessage').style.color = '#00ff00';
+            document.getElementById('verificationInput').value = '';
+        }
+
+        function resetForm() {
+            document.getElementById('signupForm').reset();
+            document.getElementById('signupForm').style.display = 'block';
+            document.getElementById('verificationSection').style.display = 'none';
+            document.getElementById('paymentSection').style.display = 'none';
+            document.getElementById('errorMessage').textContent = '';
+            document.getElementById('successMessage').textContent = '';
+            document.getElementById('verificationMessage').textContent = '';
+            document.getElementById('verificationInput').value = '';
+            generateCaptcha();
+        }
+
+        // SISTEMA DE PAGAMENTO
+        function copyBankData() {
+            const bankData = `PRIMEIRA PARCELA: R$ 7,00
+MENSALIDADE: R$ 5,00
+Banco: 0260 - Nubank
+Agência: 0001
+Conta: 46574696-6
+Titular: RODRIGO ELIAS DE BRITO`;
+            
+            navigator.clipboard.writeText(bankData).then(() => {
+                alert('✅ Dados bancários copiados para a área de transferência!');
+            }).catch(() => {
+                alert('❌ Erro ao copiar. Anote os dados manualmente.');
+            });
+        }
+
+        function copyPixKey() {
+            const pixKey = '1c814ae7-453e-470d-a9b4-9b26f1589d1a';
+            
+            navigator.clipboard.writeText(pixKey).then(() => {
+                alert('✅ Chave PIX copiada para a área de transferência!');
+            }).catch(() => {
+                alert('❌ Erro ao copiar. Anote a chave manualmente.');
+            });
+        }
+
+        function confirmPayment() {
+            if (confirm('Você confirma que já realizou o pagamento do plano premium?')) {
+                // Salvar dados do usuário com status de pagamento pendente
+                const userData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    verified: true,
+                    planType: 'premium',
+                    paymentStatus: 'pendente',
+                    registrationDate: new Date().toISOString()
+                };
+                
+                // Salvar dados do usuário
+                let allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
+                allUsers.push(userData);
+                localStorage.setItem('allUsers', JSON.stringify(allUsers));
+                localStorage.setItem('userSubscription', JSON.stringify(userData));
+                
+                alert(`🎉 Cadastro concluído com sucesso!
+
+📋 PRÓXIMOS PASSOS:
+1. Envie o comprovante de pagamento
+2. Aguarde confirmação da ativação
+3. Acesso ao plano premium será liberado em até 24h
+
+📧 Entraremos em contato pelo e-mail: ${userData.email}
+
+Obrigado por escolher o Lorito's Film Hub! 🎬`);
+                
+                closeSignupModal();
+            }
+        }
+
+        function closePaymentSection() {
+            document.getElementById('paymentSection').style.display = 'none';
+            document.getElementById('verificationSection').style.display = 'block';
+        }
+
+        // Fechar modal clicando fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('signupModal');
+            if (event.target === modal) {
+                closeSignupModal();
+            }
+        }
+
+        // SISTEMA ADMINISTRATIVO
+        const ADMIN_PASSWORD = 'lorito2025'; // Senha do administrador
+
+        function openAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'block';
+            document.getElementById('adminLogin').style.display = 'block';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('adminError').textContent = '';
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+
+        function adminLogin() {
+            const password = document.getElementById('adminPassword').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                document.getElementById('adminLogin').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+                loadUserData();
+                updateStats();
+            } else {
+                document.getElementById('adminError').textContent = 'Senha incorreta!';
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('adminLogin').style.display = 'block';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+        }
+
+        function loadUserData() {
+            const allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
+            const tbody = document.getElementById('userTableBody');
+            
+            if (allUsers.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #666;">Nenhum usuário cadastrado ainda</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = '';
+            allUsers.forEach((user, index) => {
+                const row = document.createElement('tr');
+                const registrationDate = new Date(user.registrationDate).toLocaleDateString('pt-BR');
+                
+                const paymentStatusColor = user.paymentStatus === 'confirmado' ? '#00ff00' : 
+                                           user.paymentStatus === 'pendente' ? '#ffaa00' : '#ff0000';
+                const paymentStatusText = user.paymentStatus === 'confirmado' ? '✅ Pago' : 
+                                         user.paymentStatus === 'pendente' ? '⏳ Pendente' : '❌ Não Pago';
+                
+                row.innerHTML = `
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.phone}</td>
+                    <td>${user.verified ? '<span style="color: #00ff00;">✅ Verificado</span>' : '<span style="color: #ff0000;">❌ Pendente</span>'}</td>
+                    <td><span style="color: #ff0000; font-weight: bold;">💎 ${user.planType.toUpperCase()}</span><br>
+                        <span style="color: ${paymentStatusColor}; font-size: 12px;">${paymentStatusText}</span></td>
+                    <td>${registrationDate}</td>
+                    <td>
+                        <button onclick="viewUser(${index})" class="admin-btn">👁️ Ver</button>
+                        <button onclick="togglePaymentStatus(${index})" class="admin-btn" style="background: #28a745;">💳</button>
+                        <button onclick="deleteUser(${index})" class="admin-btn danger">🗑️</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function updateStats() {
+            const allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
+            const today = new Date().toDateString();
+            
+            const totalUsers = allUsers.length;
+            const verifiedUsers = allUsers.filter(user => user.verified).length;
+            const premiumUsers = allUsers.filter(user => user.planType === 'premium').length;
+            const todayRegistrations = allUsers.filter(user => 
+                new Date(user.registrationDate).toDateString() === today
+            ).length;
+
+            document.getElementById('totalUsers').textContent = totalUsers;
+            document.getElementById('verifiedUsers').textContent = verifiedUsers;
+            document.getElementById('premiumUsers').textContent = premiumUsers;
+            document.getElementById('todayRegistrations').textContent = todayRegistrations;
+        }
+
+        function viewUser(index) {
+            const allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
+            const user = allUsers[index];
+            
+            const paymentStatusText = user.paymentStatus === 'confirmado' ? '✅ Confirmado' : 
+                                     user.paymentStatus === 'pendente' ? '⏳ Pendente' : '❌ Não Informado';
+            
+            alert(`
+📋 DETALHES DO USUÁRIO
+
+👤 Nome: ${user.name}
+📧 E-mail: ${user.email}
+📱 Telefone: ${user.phone}
+✅ Verificado: ${user.verified ? 'Sim' : 'Não'}
+💎 Plano: ${user.planType.toUpperCase()}
+💳 Pagamento: ${paymentStatusText}
+📅 Cadastro: ${new Date(user.registrationDate).toLocaleString('pt-BR')}
+            `);
+        }
+
+        function togglePaymentStatus(index) {
+            let allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
+            const user = allUsers[index];
+            
+            const currentStatus = user.paymentStatus || 'nao_pago';
+            let newStatus;
+            
+            if (currentStatus === 'pendente') {
+                newStatus = 'confirmado';
+            } else if (currentStatus === 'confirmado') {
+                newStatus = 'pendente';
+            } else {
+                newStatus = 'pendente';
+            }
+            
+            const statusText = newStatus === 'confirmado' ? 'CONFIRMADO' : 'PENDENTE';
+            
+            if (confirm(`Alterar status do pagamento para: ${statusText}?`)) {
+                allUsers[index].paymentStatus = newStatus;
+                localStorage.setItem('allUsers', JSON.stringify(allUsers));
+                loadUserData();
+                updateStats();
+                alert(`Status do pagamento alterado para: ${statusText}`);
+            }
+        }
+
+        function deleteUser(index) {
+            if (confirm('Tem certeza que deseja excluir este usuário?')) {
+                let allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
+                allUsers.splice(index, 1);
+                localStorage.setItem('allUsers', JSON.stringify(allUsers));
+                loadUserData();
+                updateStats();
+                alert('Usuário excluído com sucesso!');
+            }
+        }
+
+        function exportUserData() {
+            const allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
+            
+            if (allUsers.length === 0) {
+                alert('Nenhum dado para exportar!');
+                return;
+            }
+
+            let csvContent = 'Nome,E-mail,Telefone,Verificado,Plano,Data de Cadastro\n';
+            
+            allUsers.forEach(user => {
+                const row = [
+                    user.name,
+                    user.email,
+                    user.phone,
+                    user.verified ? 'Sim' : 'Não',
+                    user.planType,
+                    new Date(user.registrationDate).toLocaleString('pt-BR')
+                ].join(',');
+                csvContent += row + '\n';
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `usuarios_lorito_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            alert('Dados exportados com sucesso!');
+        }
+
+        function clearAllUsers() {
+            if (confirm('⚠️ ATENÇÃO: Isso irá excluir TODOS os dados dos usuários. Esta ação não pode ser desfeita. Tem certeza?')) {
+                if (confirm('Última chance! Confirma a exclusão de TODOS os dados?')) {
+                    localStorage.removeItem('allUsers');
+                    localStorage.removeItem('userSubscription');
+                    loadUserData();
+                    updateStats();
+                    alert('Todos os dados foram excluídos!');
+                }
+            }
+        }
+
+        function refreshStats() {
+            loadUserData();
+            updateStats();
+            alert('Dados atualizados!');
+        }
+
+        // SISTEMA DE LEGENDAS
+        let subtitlesEnabled = false;
+        let currentLanguage = 'pt';
+        let subtitleInterval;
+        let currentMovie = null;
+
+        function toggleSubtitles() {
+            subtitlesEnabled = !subtitlesEnabled;
+            const button = document.getElementById('ccButton');
+            const overlay = document.getElementById('subtitleOverlay');
+            
+            if (subtitlesEnabled) {
+                button.classList.add('active');
+                button.textContent = 'CC ✅';
+                startSubtitles();
+            } else {
+                button.classList.remove('active');
+                button.textContent = 'CC 📝';
+                stopSubtitles();
+                overlay.style.display = 'none';
+            }
+        }
+
+        function changeSubtitleLanguage() {
+            const languages = ['PT', 'EN', 'ES'];
+            const currentIndex = languages.indexOf(currentLanguage.toUpperCase());
+            const nextIndex = (currentIndex + 1) % languages.length;
+            const nextLang = languages[nextIndex];
+            
+            currentLanguage = nextLang.toLowerCase();
+            
+            // Atualizar botão
+            const button = document.querySelector('.cc-button:nth-child(2)');
+            button.textContent = `🌐 ${nextLang}`;
+            
+            // Reiniciar legendas se estiverem ativadas
+            if (subtitlesEnabled) {
+                stopSubtitles();
+                startSubtitles();
+            }
+        }
+
+        function startSubtitles() {
+            if (!currentMovie || !currentMovie.subtitles || !currentMovie.subtitles[currentLanguage]) {
+                return;
+            }
+            
+            const subtitles = currentMovie.subtitles[currentLanguage];
+            let currentSubtitleIndex = 0;
+            let startTime = Date.now();
+            
+            subtitleInterval = setInterval(() => {
+                const elapsedTime = (Date.now() - startTime) / 1000;
+                const overlay = document.getElementById('subtitleOverlay');
+                
+                // Encontrar legenda atual
+                const currentSubtitle = subtitles.find((sub, index) => {
+                    const nextSub = subtitles[index + 1];
+                    return elapsedTime >= sub.time && (!nextSub || elapsedTime < nextSub.time);
+                });
+                
+                if (currentSubtitle) {
+                    overlay.textContent = currentSubtitle.text;
+                    overlay.style.display = 'block';
+                    overlay.classList.add('show');
+                } else {
+                    overlay.style.display = 'none';
+                    overlay.classList.remove('show');
+                }
+                
+                // Parar após 60 segundos (duração típica de trailer)
+                if (elapsedTime > 60) {
+                    stopSubtitles();
+                }
+            }, 100);
+        }
+
+        function stopSubtitles() {
+            if (subtitleInterval) {
+                clearInterval(subtitleInterval);
+                subtitleInterval = null;
+            }
+        }
+
+        // Atualizar função showMovie para incluir legendas
+        const originalShowMovie = showMovie;
+        showMovie = function(movieId) {
+            currentMovie = movies[movieId];
+            originalShowMovie(movieId);
+            
+            // Resetar legendas
+            subtitlesEnabled = false;
+            document.getElementById('ccButton').classList.remove('active');
+            document.getElementById('ccButton').textContent = 'CC 📝';
+            document.getElementById('subtitleOverlay').style.display = 'none';
+            stopSubtitles();
+        };
+
+        // Completar legendas para todos os filmes
+        const additionalSubtitles = {
+            'parasita': {
+                pt: [
+                    { time: 0, text: "🎬 Parasita - Trailer Legendado" },
+                    { time: 5, text: "Uma família em busca de oportunidades..." },
+                    { time: 15, text: "Se infiltra na vida dos ricos..." },
+                    { time: 30, text: "Mas quem é o verdadeiro parasita?" }
+                ]
+            },
+            'cidadedeus': {
+                pt: [
+                    { time: 0, text: "🎬 Cidade de Deus - Trailer Legendado" },
+                    { time: 5, text: "Na maior favela do Rio de Janeiro..." },
+                    { time: 15, text: "Duas crianças fazem escolhas diferentes..." },
+                    { time: 30, text: "Uma história real de sobrevivência..." }
+                ]
+            },
+            'coringa': {
+                pt: [
+                    { time: 0, text: "🎬 Coringa - Trailer Legendado" },
+                    { time: 5, text: "Arthur Fleck era apenas um comediante..." },
+                    { time: 15, text: "Até que a sociedade o rejeitou..." },
+                    { time: 30, text: "E o Coringa nasceu..." }
+                ]
+            },
+            'chefao': {
+                pt: [
+                    { time: 0, text: "🎬 O Poderoso Chefão - Trailer Legendado" },
+                    { time: 5, text: "A saga da família Corleone..." },
+                    { time: 15, text: "Poder, lealdade e traição..." },
+                    { time: 30, text: "Uma oferta que não se pode recusar..." }
+                ]
+            },
+            'bladerunner': {
+                pt: [
+                    { time: 0, text: "🎬 Blade Runner 2049 - Trailer Legendado" },
+                    { time: 5, text: "30 anos após os eventos originais..." },
+                    { time: 15, text: "Um jovem blade runner descobre..." },
+                    { time: 30, text: "Um segredo que pode mudar tudo..." }
+                ]
+            },
+            'matrix': {
+                pt: [
+                    { time: 0, text: "🎬 Matrix - Trailer Legendado" },
+                    { time: 5, text: "Neo, você vive em uma mentira..." },
+                    { time: 15, text: "A realidade é uma simulação..." },
+                    { time: 30, text: "Bem-vindo ao mundo real..." }
+                ]
+            },
+            'interestelar': {
+                pt: [
+                    { time: 0, text: "🎬 Interestelar - Trailer Legendado" },
+                    { time: 5, text: "A Terra está morrendo..." },
+                    { time: 15, text: "A última esperança está nas estrelas..." },
+                    { time: 30, text: "O amor transcende dimensões..." }
+                ]
+            },
+            'alien': {
+                pt: [
+                    { time: 0, text: "🎬 Alien - Trailer Legendado" },
+                    { time: 5, text: "No espaço, ninguém pode ouvir você gritar..." },
+                    { time: 15, text: "Uma criatura perfeita..." },
+                    { time: 30, text: "Projetada para matar..." }
+                ]
+            }
+        };
+
+        // Adicionar legendas aos filmes restantes
+        Object.keys(additionalSubtitles).forEach(movieId => {
+            if (movies[movieId]) {
+                movies[movieId].subtitles = additionalSubtitles[movieId];
+            }
+        });
+
+        // SISTEMA DE PROPAGANDAS COMERCIAIS
+        function contactSponsor(type) {
+            let message = '';
+            let contact = '';
+            
+            switch(type) {
+                case 'tech':
+                    message = '🔥 Olá! Vi seu anúncio no Lorito\'s Film Hub e tenho interesse nos produtos de tecnologia!';
+                    contact = 'https://wa.me/5511999999999?text=' + encodeURIComponent(message);
+                    break;
+                case 'pizza':
+                    message = '🍕 Olá! Vi seu anúncio no Lorito\'s Film Hub e quero conhecer o cardápio!';
+                    contact = 'https://wa.me/5511888888888?text=' + encodeURIComponent(message);
+                    break;
+                case 'academia':
+                    message = '💪 Olá! Vi seu anúncio no Lorito\'s Film Hub e tenho interesse na academia!';
+                    contact = 'https://wa.me/5511777777777?text=' + encodeURIComponent(message);
+                    break;
+            }
+            
+            if (contact) {
+                window.open(contact, '_blank');
+            }
+        }
+
+        function contactForAdvertising() {
+            const message = '📺 Olá! Tenho interesse em anunciar meu negócio no Lorito\'s Film Hub. Podem me enviar informações sobre valores e formatos?';
+            const whatsapp = 'https://wa.me/5511999999999?text=' + encodeURIComponent(message);
+            window.open(whatsapp, '_blank');
+        }
+
+        // Função para adicionar nova propaganda (para o administrador)
+        function addCommercial(title, description, videoId, contact, badge = '🌟 NOVO') {
+            const commercialGrid = document.getElementById('commercialGrid');
+            const lastCard = commercialGrid.lastElementChild; // Carta "SEU ANÚNCIO AQUI"
+            
+            const newCard = document.createElement('div');
+            newCard.className = 'commercial-card';
+            newCard.innerHTML = `
+                <div class="sponsor-badge">${badge}</div>
+                <iframe class="commercial-video" 
+                    src="https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&showinfo=0" 
+                    frameborder="0" allowfullscreen>
+                </iframe>
+                <h3>${title}</h3>
+                <p>${description}</p>
+                <a href="${contact}" class="commercial-contact" target="_blank">📞 Entrar em Contato</a>
+            `;
+            
+            // Inserir antes da carta "SEU ANÚNCIO AQUI"
+            commercialGrid.insertBefore(newCard, lastCard);
+        }
+
+        // Exemplo de como adicionar propaganda dinamicamente
+        // addCommercial('Nova Loja', 'Descrição da loja', 'VIDEO_ID', 'https://wa.me/5511999999999', '🔥 OFERTA');
+    </script>
+<div class="video-grid">
+<iframe src="https://drive.google.com/file/d/1TqBbXLUGwlhEd5mUW31asw4H2XIHdUun/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1bLl50aukO4LwZqTfn7NRTMkmr3aP1qB-/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/191sovm4BeXbE_3nYllrKOwAIdi1VcQb8/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1XvKLRnxqswWt7h-Bx51syS08DJnBz5FC/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1H4sSiuhgiEOCX1T9Vx4qZoi7Vr6Mobfa/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1nelShntok7UMBUROVgkEOdqiwcUAhTlV/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/139pPUMREcW3ySx5ooDswTJC3VyARK4TW/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1wd_6l4KWHpvRtDfdP9DQx0xhcHyKI47z/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1aQyxOYRvqKS9XFRJXkPBk2YJ_Kf2DxTF/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1wzqs0z2jYbP3eaqgqe1apoX5wPQaDwHi/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1AlaFUzByXIdZLg0sZZna8g37wuwsLJfI/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1cxJiC6NcAGljIF8EEBz038_wWLLMfmTA/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1ejonkAsuD6a0sNjp2kWCEzYXMYLvFYg5/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/15KutIBF-FeA7a8KO44zU4QyxtCbgSXGk/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/112t_TAp-nPeYtiUWV8AaC_dxzPPglXJl/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1WnbbOCOetitlsQl71GhKs9GXhRjgkUcH/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/18P6cKjACq1GSGwdF0ZrtkjDvAU8RpGWB/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1LX8QJkct_-3tjY6hHxhjbVhIHtuxM5x0/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1sf1E3HRkdnJUhKo8wOf3onEBS4noEopY/preview" allowfullscreen></iframe>
+<iframe src="https://drive.google.com/file/d/1drkW6iVduo9ggBpcak2gXqMR4X88qomN/preview" allowfullscreen></iframe>
+</div>
+</body>
+</html>
