@@ -1,166 +1,126 @@
+<!-- Cole este código no bloco "HTML Personalizado" no WordPress -->
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo de Filmes</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: #f1f1f1;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 2rem;
-    }
-    iframe, video {
-      margin-bottom: 2rem;
-      border: 1px solid #444;
-      border-radius: 8px;
-      background-color: #000;
-    }
-    img {
-      display: block;
-      margin: 1rem auto;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>🎬 Catálogo de Filmes</h1>
-<img src="https://drive.google.com/thumbnail?id=ID_DO_VIDEO&sz=w200" width="200">
+<header>
+  <img src="https://loritosfilmhub.files.wordpress.com/2025/07/b7c262e9-d202-408b-bfd3-968cb833b9ec.png" alt="Logo">
+  <div class="search-cadastro">
+    <input type="text" placeholder="Buscar filme...">
+    <button>Cadastrar</button>
+  </div>
+</header>
 
-<img src="https://drive.google.com/thumbnail?id=ID_DO_VIDEO&sz=w200" width="200">
-
-<img src="https://drive.google.com/thumbnail?id=ID_DO_VIDEO&sz=w200" width="200">
-
-<div class="video-item">
-  <h3>Título do Vídeo</h3>
-  <iframe src="LINK_PREVIEW" width="100%" height="480" allowfullscreen></iframe>
-  <p>Descrição opcional</p>
+<div class="carrossel">
+  <img src="https://i.imgur.com/YxJ6YOw.jpeg" alt="Destaque 1">
+  <img src="https://i.imgur.com/muIuc5O.jpeg" alt="Destaque 2">
+  <img src="https://i.imgur.com/s4V8vWz.jpeg" alt="Destaque 3">
 </div>
 
-<!-- Vídeo 1 -->
-<iframe src="https://drive.google.com/file/d/1TqBbXLUGwlhEd5mUW31asw4H2XIHdUun/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
+<div class="genero">
+  <h2>🔥 Ação</h2>
+  <div class="filme"><iframe src="https://drive.google.com/file/d/1TqBbXLUGwlhEd5mUW31asw4H2XIHdUun/preview" allowfullscreen></iframe></div>
+  <div class="filme"><iframe src="https://drive.google.com/file/d/1drkW6iVduo9ggBpcak2gXqMR4X88qomN/preview" allowfullscreen></iframe></div>
+  <div class="filme"><iframe src="https://drive.google.com/file/d/1ejonkAsuD6a0sNjp2kWCEzYXMYLvFYg5/preview" allowfullscreen></iframe></div>
+</div>
 
-<!-- Vídeo 2 -->
-<iframe src="https://drive.google.com/file/d/1bLl50aukO4LwZqTfn7NRTMkmr3aP1qB-/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
+<div class="genero">
+  <h2>🎃 Terror</h2>
+  <div class="filme"><iframe src="https://drive.google.com/file/d/15KutIBF-FeA7a8KO44zU4QyxtCbgSXGk/preview" allowfullscreen></iframe></div>
+  <div class="filme"><iframe src="https://drive.google.com/file/d/1nelShntok7UMBUROVgkEOdqiwcUAhTlV/preview" allowfullscreen></iframe></div>
+</div>
 
-<!-- Vídeo 3 -->
-<iframe src="https://drive.google.com/file/d/191sovm4BeXbE_3nYllrKOwAIdi1VcQb8/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
+<div class="genero">
+  <h2>🎭 Drama</h2>
+  <div class="filme"><iframe src="https://drive.google.com/file/d/1aQyxOYRvqKS9XFRJXkPBk2YJ_Kf2DxTF/preview" allowfullscreen></iframe></div>
+  <div class="filme"><iframe src="https://drive.google.com/file/d/1cxJiC6NcAGljIF8EEBz038_wWLLMfmTA/preview" allowfullscreen></iframe></div>
+  <div class="filme"><iframe src="https://drive.google.com/file/d/1AlaFUzByXIdZLg0sZZna8g37wuwsLJfI/preview" allowfullscreen></iframe></div>
+  <div class="filme"><iframe src="https://drive.google.com/file/d/1wzqs0z2jYbP3eaqgqe1apoX5wPQaDwHi/preview" allowfullscreen></iframe></div>
+  <div class="filme"><iframe src="https://drive.google.com/file/d/139pPUMREcW3ySx5ooDswTJC3VyARK4TW/preview" allowfullscreen></iframe></div>
+</div>
 
-<!-- Vídeo 4 -->
-<iframe src="https://drive.google.com/file/d/1XvKLRnxqswWt7h-Bx51syS08DJnBz5FC/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
+<div class="cadastro-banner">
+  Cadastre-se no Plano Premium
+</div>
 
-<!-- Vídeo 5 -->
-<iframe src="https://drive.google.com/file/d/1H4sSiuhgiEOCX1T9Vx4qZoi7Vr6Mobfa/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
+<!-- Agora cole esse CSS em "Aparência > Personalizar > CSS adicional" -->
 
-<!-- Vídeo 6 -->
-<iframe src="https://drive.google.com/file/d/1nelShntok7UMBUROVgkEOdqiwcUAhTlV/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<!-- Vídeo 7 -->
-<iframe src="https://drive.google.com/file/d/139pPUMREcW3ySx5ooDswTJC3VyARK4TW/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<!-- Vídeo 8 -->
-<iframe src="https://drive.google.com/file/d/1wd_6l4KWHpvRtDfdP9DQx0xhcHyKI47z/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<!-- Vídeo 1 -->
-<iframe src="https://drive.google.com/file/d/1aQyxOYRvqKS9XFRJXkPBk2YJ_Kf2DxTF/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<!-- Vídeo 2 -->
-<iframe src="https://drive.google.com/file/d/1wzqs0z2jYbP3eaqgqe1apoX5wPQaDwHi/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<!-- Vídeo 3 -->
-<iframe src="https://drive.google.com/file/d/1AlaFUzByXIdZLg0sZZna8g37wuwsLJfI/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<!-- Vídeo 4 -->
-<iframe src="https://drive.google.com/file/d/1cxJiC6NcAGljIF8EEBz038_wWLLMfmTA/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<!-- Vídeo 5 -->
-<iframe src="https://drive.google.com/file/d/1ejonkAsuD6a0sNjp2kWCEzYXMYLvFYg5/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<!-- Vídeo 1 -->
-<iframe src="https://drive.google.com/file/d/15KutIBF-FeA7a8KO44zU4QyxtCbgSXGk/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<!-- Vídeo 2 -->
-<iframe src="https://drive.google.com/file/d/112t_TAp-nPeYtiUWV8AaC_dxzPPglXJl/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<!-- Vídeo 3 -->
-<iframe src="https://drive.google.com/file/d/1WnbbOCOetitlsQl71GhKs9GXhRjgkUcH/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<!-- Vídeo 4 -->
-<iframe src="https://drive.google.com/file/d/18P6cKjACq1GSGwdF0ZrtkjDvAU8RpGWB/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<!-- Vídeo 5 -->
-<iframe src="https://drive.google.com/file/d/1LX8QJkct_-3tjY6hHxhjbVhIHtuxM5x0/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<!-- Vídeo 6 -->
-<iframe src="https://drive.google.com/file/d/1sf1E3HRkdnJUhKo8wOf3onEBS4noEopY/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<!-- Vídeo 7 -->
-<iframe src="https://drive.google.com/file/d/1drkW6iVduo9ggBpcak2gXqMR4X88qomN/preview?rm=minimal" width="100%" height="480" allowfullscreen></iframe>
-
-<img src="https://drive.google.com/thumbnail?id=ID_DO_VIDEO&sz=w300" width="300" style="border: 1px solid #ddd; border-radius: 4px;">
-
-<!-- Vídeo 1 -->
-<video controls width="100%">
-  <source src="https://drive.google.com/uc?export=download&id=1aQyxOYRvqKS9XFRJXkPBk2YJ_Kf2DxTF" type="video/mp4">
-</video>
-
-<!-- Vídeo 2 -->
-<video controls width="100%">
-  <source src="https://drive.google.com/uc?export=download&id=1wzqs0z2jYbP3eaqgqe1apoX5wPQaDwHi" type="video/mp4">
-</video>
-
-<!-- Vídeo 3 -->
-<video controls width="100%">
-  <source src="https://drive.google.com/uc?export=download&id=1AlaFUzByXIdZLg0sZZna8g37wuwsLJfI" type="video/mp4">
-</video>
-
-<!-- Vídeo 4 -->
-<video controls width="100%">
-  <source src="https://drive.google.com/uc?export=download&id=1cxJiC6NcAGljIF8EEBz038_wWLLMfmTA" type="video/mp4">
-</video>
-
-<!-- Vídeo 5 -->
-<video controls width="100%">
-  <source src="https://drive.google.com/uc?export=download&id=1ejonkAsuD6a0sNjp2kWCEzYXMYLvFYg5" type="video/mp4">
-</video>
-
-<!-- Vídeo 1 -->
-<video controls width="100%" controlsList="nodownload">
-  <source src="https://drive.google.com/uc?export=download&id=1O3nZW6hER4l0X_-scCMb_q9zLTXuoG7W" type="video/mp4">
-</video>
-
-<!-- Vídeo 2 -->
-<video controls width="100%" controlsList="nodownload">
-  <source src="https://drive.google.com/uc?export=download&id=1S7JxWV-hAn30HdVthCRU7qx8r4cv-9Fi" type="video/mp4">
-</video>
-
-<!-- Vídeo 3 -->
-<video controls width="100%" controlsList="nodownload">
-  <source src="https://drive.google.com/uc?export=download&id=1Zq98i4iGnK7tIA5QD2oh3Gn-GWryWu6r" type="video/mp4">
-</video>
-
-<!-- Vídeo 4 -->
-<video controls width="100%" controlsList="nodownload">
-  <source src="https://drive.google.com/uc?export=download&id=1ftpAdMM85oXIBmovwUhUa_ZjoHp-gOtL" type="video/mp4">
-</video>
-
-<!-- Vídeo 5 -->
-<video controls width="100%" controlsList="nodownload">
-  <source src="https://drive.google.com/uc?export=download&id=1PdxVvxZsnMumiQHNaZCCsYQC4P4S990J" type="video/mp4">
-</video>
-  </div>
-</body>
-</html>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://loritosfilmhub.files.wordpress.com/2025/07/58edc4c6-119d-4763-8065-e49e74848d29.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fff;
+  }
+  header {
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+  }
+  header img {
+    height: 70px;
+  }
+  .search-cadastro {
+    display: flex;
+    gap: 10px;
+  }
+  .search-cadastro input {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    width: 200px;
+  }
+  .search-cadastro button {
+    padding: 8px 15px;
+    background: #ffc107;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .carrossel {
+    display: flex;
+    overflow: auto;
+    gap: 15px;
+    padding: 20px 30px;
+    scroll-behavior: smooth;
+  }
+  .carrossel img {
+    height: 220px;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+  .genero {
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.75);
+    margin: 30px;
+    border-radius: 10px;
+  }
+  .genero h2 {
+    color: #ffc107;
+    margin-bottom: 20px;
+  }
+  .filme {
+    margin-bottom: 20px;
+  }
+  iframe {
+    width: 100%;
+    height: 480px;
+    border: none;
+    border-radius: 5px;
+  }
+  .cadastro-banner {
+    text-align: center;
+    background: #ffc107;
+    color: #000;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 30px auto;
+    width: fit-content;
+    border-radius: 5px;
+  }
+</style>
