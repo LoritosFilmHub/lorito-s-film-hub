@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lorito’s Film Hub</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+    }
+    .tela {
+      display: none;
+      padding: 30px;
+      min-height: 100vh;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .ativa { display: block; }
+    .entrada, .planos {
+      background-image: url('https://loritosfilmhub.files.wordpress.com/2025/07/58edc4c6-119d-4763-8065-e49e74848d29.png');
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .entrada h1, .planos h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    input, button {
+      padding: 12px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .btn { background-color: #ffc107; color: #000; font-weight: bold; cursor: pointer; }
+    .planos .caixa {
+      background-color: rgba(0,0,0,0.7);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .catalogo {
+      background-image: url('https://loritosfilmhub.files.wordpress.com/2025/07/58edc4c6-119d-4763-8065-e49e74848d29.png');
+    }
+    header {
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 30px;
+    }
+    header img { height: 60px; }
+    .carrossel {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      padding: 20px;
+    }
+    .carrossel img {
+      height: 200px;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .genero {
+      padding: 30px;
+      background-color: rgba(0,0,0,0.75);
+      margin: 20px;
+      border-radius: 10px;
+    }
+    .genero h2 {
+      color: #ffc107;
+      margin-bottom: 15px;
+    }
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Tela 1: Entrada -->
+<div class="tela entrada ativa" id="tela1">
+  <h1>Bem-vindo ao Lorito’s Film Hub</h1>
+  <p>Insira seu e-mail ou número de celular para começar</p>
+  <input type="text" placeholder="E-mail ou celular" id="userInput" />
+  <button class="btn" onclick="proximaTela(2)">Vamos lá</button>
+</div>
+
+<!-- Tela 2: Escolha de plano -->
+<div class="tela planos" id="tela2">
+  <div class="caixa">
+    <h2>Escolha seu Plano</h2>
+    <p><strong>Plano Básico:</strong> R$ 10 inscrição + R$ 5/mês</p>
+    <p><strong>Plano Patrocinador:</strong> R$ 10/mês com 1 vídeo de propaganda (1 min) + acesso completo</p>
+    <br />
+    <p><strong>Pagamento via Pix:</strong><br />
+    Chave Pix: 1c814ae7-453e-470d-a9b4-9b26f1589d1a<br />
+    Nubank: Agência 0001 | Conta 4654696-6 | Banco 0260<br />
+    Nome: Rodrigo Elias De Brito</p>
+    <br />
+    <button class="btn" onclick="proximaTela(3)">Acessar Catálogo</button>
+  </div>
+</div>
+
+<!-- Tela 3: Catálogo -->
+<div class="tela catalogo" id="tela3">
+  <header>
+    <img src="https://loritosfilmhub.files.wordpress.com/2025/07/b7c262e9-d202-408b-bfd3-968cb833b9ec.png" alt="Logo" />
+  </header>
+
+  <div class="carrossel">
+    <img src="https://i.imgur.com/YxJ6YOw.jpeg" />
+    <img src="https://i.imgur.com/muIuc5O.jpeg" />
+    <img src="https://i.imgur.com/s4V8vWz.jpeg" />
+  </div>
+
+  <div class="genero">
+    <h2>🔥 Ação</h2>
+    <iframe src="https://drive.google.com/file/d/1TqBbXLUGwlhEd5mUW31asw4H2XIHdUun/preview" allowfullscreen></iframe>
+    <iframe src="https://drive.google.com/file/d/1drkW6iVduo9ggBpcak2gXqMR4X88qomN/preview" allowfullscreen></iframe>
+  </div>
+
+  <div class="genero">
+    <h2>🎃 Terror</h2>
+    <iframe src="https://drive.google.com/file/d/15KutIBF-FeA7a8KO44zU4QyxtCbgSXGk/preview" allowfullscreen></iframe>
+    <iframe src="https://drive.google.com/file/d/1nelShntok7UMBUROVgkEOdqiwcUAhTlV/preview" allowfullscreen></iframe>
+  </div>
+
+  <div class="genero">
+    <h2>🎭 Drama</h2>
+    <iframe src="https://drive.google.com/file/d/1cxJiC6NcAGljIF8EEBz038_wWLLMfmTA/preview" allowfullscreen></iframe>
+    <iframe src="https://drive.google.com/file/d/1AlaFUzByXIdZLg0sZZna8g37wuwsLJfI/preview" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+  function proximaTela(n) {
+    document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
+    document.getElementById('tela' + n).classList.add('ativa');
+  }
+</script>
+
+</body>
+</html>
