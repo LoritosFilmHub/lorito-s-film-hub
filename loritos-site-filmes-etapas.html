@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Lorito's Film Hub</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    section {
+      display: none;
+      height: 100vh;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 30px;
+    }
+    section.active { display: flex; }
+
+    h1 { font-size: 3em; margin-bottom: 20px; }
+    p { font-size: 1.2em; margin-bottom: 20px; }
+
+    input[type="text"], input[type="email"] {
+      padding: 15px;
+      font-size: 16px;
+      width: 300px;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 15px;
+    }
+    button {
+      background-color: #e50914;
+      color: white;
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .planos {
+      background-color: #111;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: left;
+      max-width: 600px;
+    }
+    .catalogo {
+      padding: 30px;
+    }
+    .catalogo h2 {
+      margin: 30px 0 10px;
+      color: #ffc107;
+    }
+    iframe {
+      width: 100%;
+      max-width: 600px;
+      height: 350px;
+      margin: 10px auto;
+      display: block;
+      border-radius: 5px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Tela 1 - Entrada -->
+<section class="active" id="tela1" style="background-image: url('https://loritosfilmhub.files.wordpress.com/2025/07/58edc4c6-119d-4763-8065-e49e74848d29.png');">
+  <h1>Filmes, séries e muito mais, sem limites</h1>
+  <p>Informe seu e-mail ou número de celular para começar</p>
+  <input type="text" placeholder="E-mail ou celular" id="entrada">
+  <button onclick="proximaTela(2)">Vamos lá</button>
+</section>
+
+<!-- Tela 2 - Planos -->
+<section id="tela2">
+  <div class="planos">
+    <h1>Escolha seu plano</h1>
+    <p><strong>Plano Premium:</strong> R$10 de inscrição + R$5/mês</p>
+    <p><strong>Patrocinador:</strong> R$10/mês (direito a 1 min de propaganda + acesso total)</p>
+    <h3>Pagamento via Pix</h3>
+    <p><strong>Chave Pix:</strong> 1c814ae7-453e-470d-a9b4-9b26f1589d1a</p>
+    <p><strong>Conta Nubank:</strong> Agência 0001, Conta 4654696-6, Banco 0260</p>
+    <p><strong>Nome:</strong> Rodrigo Elias De Brito</p>
+    <button onclick="proximaTela(3)">Ir para Catálogo</button>
+  </div>
+</section>
+
+<!-- Tela 3 - Catálogo -->
+<section id="tela3">
+  <div class="catalogo">
+    <h1>Catálogo de Filmes</h1>
+
+    <h2>🔥 Ação</h2>
+    <iframe src="https://drive.google.com/file/d/1TqBbXLUGwlhEd5mUW31asw4H2XIHdUun/preview" allowfullscreen></iframe>
+    <iframe src="https://drive.google.com/file/d/1drkW6iVduo9ggBpcak2gXqMR4X88qomN/preview" allowfullscreen></iframe>
+
+    <h2>🎃 Terror</h2>
+    <iframe src="https://drive.google.com/file/d/15KutIBF-FeA7a8KO44zU4QyxtCbgSXGk/preview" allowfullscreen></iframe>
+    <iframe src="https://drive.google.com/file/d/1nelShntok7UMBUROVgkEOdqiwcUAhTlV/preview" allowfullscreen></iframe>
+
+    <h2>🎭 Drama</h2>
+    <iframe src="https://drive.google.com/file/d/1aQyxOYRvqKS9XFRJXkPBk2YJ_Kf2DxTF/preview" allowfullscreen></iframe>
+    <iframe src="https://drive.google.com/file/d/1cxJiC6NcAGljIF8EEBz038_wWLLMfmTA/preview" allowfullscreen></iframe>
+  </div>
+</section>
+
+<script>
+  function proximaTela(num) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.getElementById('tela' + num).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
