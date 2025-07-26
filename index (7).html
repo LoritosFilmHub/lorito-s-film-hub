@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Lorito's Film Hub</title>
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    nav {
+      background-color: yellow;
+      padding: 10px;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      border-radius: 15px;
+      box-shadow: 0 0 10px red;
+    }
+    nav a {
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 10px;
+      font-size: 18px;
+    }
+    section {
+      padding: 80px 20px 40px;
+      border-bottom: 1px solid #333;
+    }
+    .botao {
+      display: inline-block;
+      padding: 10px 20px;
+      background: red;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MENU FIXO -->
+  <nav>
+    <a href="#inicio">🏡 Início</a>
+    <a href="#filmes">🎬 Filmes</a>
+    <a href="#status">✅ Status</a>
+  </nav>
+
+  <!-- INÍCIO -->
+  <section id="inicio">
+    <h1>🎥 LORITO'S FILM HUB</h1>
+    <p>Bem-vindo! Escolha um filme e aproveite.</p>
+    <a href="#filmes" class="botao">Ver Filmes</a>
+  </section>
+
+  <!-- FILMES -->
+  <section id="filmes">
+    <h2>🔥 Filmes de Ação</h2>
+
+    <!-- Exemplo de filme -->
+    <div>
+      <h3>Filme de Ação #1</h3>
+      <p>Aventura / Ação</p>
+      <a class="botao" href="https://drive.google.com/file/d/SEU-ID-AQUI/view" target="_blank">▶️ Assistir Agora</a>
+    </div>
+    
+    <div style="margin-top: 20px;">
+      <a href="#inicio" class="botao">🔙 Voltar ao Início</a>
+    </div>
+  </section>
+
+  <!-- STATUS -->
+  <section id="status">
+    <h2>📊 Status da Plataforma</h2>
+    <p>Todos os filmes estão disponíveis. ✅</p>
+    <a href="#inicio" class="botao">🔙 Voltar ao Início</a>
+  </section>
+
+</body>
+</html>
