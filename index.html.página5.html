@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - Lorito's Film Hub</title>
+</head>
+<body>
+<div class="streaming-platform">
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #141414;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    
+    .platform-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(180deg, rgba(20,20,20,1) 0%, rgba(20,20,20,0.8) 70%, transparent 100%);
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+    
+    .logo {
+      font-size: 2.2em;
+      font-weight: bold;
+      color: #e50914;
+      text-decoration: none;
+    }
+    
+    .nav-menu {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+    
+    .nav-item {
+      color: #e5e5e5;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .nav-item:hover {
+      color: #fff;
+      background: rgba(229, 9, 20, 0.1);
+    }
+    
+    .user-menu {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    
+    .plan-info {
+      background: rgba(229, 9, 20, 0.1);
+      color: #e50914;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8em;
+      font-weight: bold;
+      border: 1px solid rgba(229, 9, 20, 0.3);
+    }
+    
+    .subscription-btn {
+      background: #e50914;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    
+    .subscription-btn:hover {
+      background: #f40612;
+    }
+    
+    .hero-banner {
+      height: 70vh;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(20,20,20,0.8)), url('bNk3AY86FzG8mZjVZAxoG');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      padding: 0 50px;
+      margin-top: 70px;
+      position: relative;
+    }
+    
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('7Xj7mwj43tGN-GIifHs1V');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    
+    .hero-content {
+      max-width: 600px;
+      z-index: 10;
+    }
+    
+    .hero-title {
+      font-size: 3.5em;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+    
+    .hero-description {
+      font-size: 1.4em;
+      margin-bottom: 30px;
+      color: #fff;
+      line-height: 1.4;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .play-btn {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 6px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .play-btn:hover {
+      background: rgba(255,255,255,0.8);
+    }
+    
+    .info-btn {
+      background: rgba(109, 109, 110, 0.7);
+      color: #fff;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 6px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .info-btn:hover {
+      background: rgba(109, 109, 110, 0.4);
+    }
+    
+    .content-sections {
+      padding: 40px 50px;
+    }
+    
+    .section {
+      margin-bottom: 50px;
+    }
+    
+    .section-title {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      color: #e5e5e5;
+      font-weight: 600;
+    }
+    
+    .movies-row {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scroll-behavior: smooth;
+    }
+    
+    .movies-row::-webkit-scrollbar {
+      height: 6px;
+    }
+    
+    .movies-row::-webkit-scrollbar-track {
+      background: #333;
+      border-radius: 3px;
+    }
+    
+    .movies-row::-webkit-scrollbar-thumb {
+      background: #e50914;
+      border-radius: 3px;
+    }
+    
+    .movie-item {
+      min-width: 250px;
+      height: 350px;
+      background: #2a2a2a;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    
+    .movie-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      z-index: 10;
+    }
+    
+    .movie-poster {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+    
+    .movie-info {
+      padding: 15px;
+    }
+    
+    .movie-title {
+      font-size: 1.1em;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #e5e5e5;
+    }
+    
+    .movie-genre {
+      font-size: 0.9em;
+      color: #999;
+    }
+    
+    .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      backdrop-filter: blur(5px);
+    }
+    
+    .video-container {
+      position: relative;
+      width: 90%;
+      height: 80%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .video-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+      position: relative;
+      z-index: 1000;
+    }
+    
+    .video-container::after {
+      content: 'Lorito\'s Film Hub';
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      background: rgba(229, 9, 20, 0.9);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: bold;
+      z-index: 1002;
+      backdrop-filter: blur(10px);
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5em;
+      z-index: 1001;
+      transition: background 0.3s ease;
+    }
+    
+    .close-btn:hover {
+      background: #e50914;
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .platform-header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .logo {
+        font-size: 1.8em;
+      }
+      
+      .nav-menu {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .hero-banner {
+        padding: 0 20px;
+        height: 60vh;
+      }
+      
+      .hero-title {
+        font-size: 2.5em;
+      }
+      
+      .hero-description {
+        font-size: 1.1em;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .play-btn, .info-btn {
+        padding: 12px 30px;
+        width: 100%;
+        max-width: 200px;
+        justify-content: center;
+      }
+      
+      .content-sections {
+        padding: 30px 20px;
+      }
+      
+      .movie-item {
+        min-width: 200px;
+        height: 300px;
+      }
+      
+      .movie-poster {
+        height: 230px;
+      }
+      
+      .video-container {
+        width: 95%;
+        height: 70%;
+      }
+      
+      .video-container::after {
+        bottom: 15px;
+        left: 15px;
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2em;
+      }
+      
+      .movie-item {
+        min-width: 180px;
+        height: 280px;
+      }
+      
+      .movie-poster {
+        height: 210px;
+      }
+      
+      .movie-info {
+        padding: 10px;
+      }
+      
+      .close-btn {
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        font-size: 1.2em;
+      }
+    }
+  </style>
+
+  <!-- Header -->
+  <header class="platform-header">
+    <a href="#" class="logo">LORITO'S FILM HUB</a>
+    <nav class="nav-menu">
+      <a class="nav-item" onclick="goToLandingPage()">Página Inicial</a>
+      <a class="nav-item">Filmes</a>
+      <a class="nav-item">Séries</a>
+      <a class="nav-item">Minha Lista</a>
+    </nav>
+    <div class="user-menu">
+      <span class="plan-info" id="planInfo">Plano: Gratuito</span>
+      <button class="subscription-btn" onclick="goToPaymentPage()">Assinar R$ 10,00</button>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <h1 class="hero-title">Bem-vindo ao Lorito's Film Hub</h1>
+      <p class="hero-description">Descubra milhares de filmes e séries em alta qualidade! Usuários: R$ 5,00/mês | Colaboradores/Patrocinadores: R$ 7,00/mês (inclui espaço para suas propagandas). Sua próxima obsessão está aqui!</p>
+      <div class="hero-buttons">
+        <button class="play-btn" onclick="playFeaturedMovie()">
+          ▶️ Assistir Agora
+        </button>
+        <button class="info-btn" onclick="showInfo()">
+          ℹ️ Mais Informações
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Sections -->
+  <main class="content-sections">
+    
+    <!-- Seção de Preços Especiais -->
+    <section class="section">
+      <div style="background: linear-gradient(135deg, #e50914, #f40612); padding: 30px; border-radius: 15px; margin-bottom: 40px; text-align: center; box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);">
+        <h2 style="font-size: 2.2em; font-weight: bold; margin-bottom: 15px; color: white;">💰 OFERTA ESPECIAL! 💰</h2>
+        <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 20px;">
+          <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; backdrop-filter: blur(10px);">
+            <h3 style="color: #ffd700; font-size: 1.5em; margin-bottom: 10px;">🔥 1º MÊS</h3>
+            <p style="font-size: 2.5em; font-weight: bold; color: white; margin: 0;">R$ 10,00</p>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9em;">Preço promocional</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; backdrop-filter: blur(10px);">
+            <h3 style="color: #ffd700; font-size: 1.5em; margin-bottom: 10px;">💎 APÓS 1º MÊS</h3>
+            <p style="font-size: 2.5em; font-weight: bold; color: white; margin: 0;">R$ 5,00/mês</p>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9em;">Usuários comuns</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; backdrop-filter: blur(10px); border: 2px solid #ffd700;">
+            <h3 style="color: #ffd700; font-size: 1.5em; margin-bottom: 10px;">🤝 COLABORADORES</h3>
+            <p style="font-size: 2.5em; font-weight: bold; color: white; margin: 0;">R$ 7,00/mês</p>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9em;">Filmes + Espaço Publicitário</p>
+          </div>
+        </div>
+        <p style="color: white; font-size: 1.2em; margin-bottom: 15px;">
+          🎬 <strong>Acesso completo aos filmes inclusos</strong> • 📺 Colaboradores pagam R$ 7,00/mês por 1 minuto de propaganda
+        </p>
+        <button onclick="goToPaymentPage()" style="background: white; color: #e50914; border: none; padding: 15px 30px; border-radius: 8px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.3s ease;">
+          🚀 ASSINAR AGORA POR R$ 10,00
+        </button>
+      </div>
+    </section>
+    <!-- Em Alta -->
+    <section class="section">
+      <h2 class="section-title">🔥 Em Alta</h2>
+      <div class="movies-row" id="trending">
+        <div class="movie-item" onclick="playMovie('1wzqs0z2jYbP3eaqgqe1apoX5wPQaDwHi', 'A Hora do Pesadelo (2010) - Remake', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/9E2y5Q7WlCVNEhP5GiVTjhEhx1o.jpg" alt="A Hora do Pesadelo" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">🎬 A HORA DO PESADELO</h3>
+            <p class="movie-genre">Terror • Suspense • Remake 2010</p>
+          </div>
+        </div>
+        
+        <div class="movie-item" onclick="playMovie('1dxEz9GhAjz4Qx1C9x9fGiItct2GzrLx4', 'Atividade Paranormal - Terror Sobrenatural', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg" alt="Atividade Paranormal" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">💀 ATIVIDADE PARANORMAL</h3>
+            <p class="movie-genre">Terror • Sobrenatural • Found Footage</p>
+          </div>
+        </div>
+        
+        <div class="movie-item" onclick="playMovie('1ZecJhvYvjizHN9qmDvPzvL-O_y8lHB-E', 'Fragmentado - Múltiplas Personalidades', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg" alt="Fragmentado" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">😨 FRAGMENTADO</h3>
+            <p class="movie-genre">Suspense • Psicológico • Thriller</p>
+          </div>
+        </div>
+        
+        <div class="movie-item" onclick="playMovie('1twqz_BgIy3TBp7I2bRZ8mJ-mdcekZkKV', 'Se Beber, Não Case - Comédia Épica', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="Se Beber, Não Case" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">🤣 SE BEBER, NÃO CASE</h3>
+            <p class="movie-genre">Comédia • Humor • Las Vegas</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Adicionados Recentemente -->
+    <section class="section">
+      <h2 class="section-title">🆕 Adicionados Recentemente</h2>
+      <div class="movies-row" id="recent">
+        <div class="movie-item" onclick="playMovie('1ISkNJ6yxb1ooS_o8RLpyteofWKLpMTkM', 'Velozes e Furiosos 7 - Adrenalina Total', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg" alt="Velozes e Furiosos 7" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">🎬 VELOZES E FURIOSOS 7</h3>
+            <p class="movie-genre">Ação • Carros • Adrenalina</p>
+          </div>
+        </div>
+        
+        <div class="movie-item" onclick="playMovie('1TqBbXLUGwlhEd5mUW31asw4H2XIHdUun', 'John Wick - Assassino Profissional', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg" alt="John Wick" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">🔥 JOHN WICK</h3>
+            <p class="movie-genre">Ação • Assassino • Thriller</p>
+          </div>
+        </div>
+        
+        <div class="movie-item" onclick="playMovie('1PdxVvxZsnMumiQHNaZCCsYQC4P4S990J', 'À Procura da Felicidade - Will Smith', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/e1J2oNzSBdou01sUvriVuoYp0pJ.jpg" alt="À Procura da Felicidade" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">🎭 À PROCURA DA FELICIDADE</h3>
+            <p class="movie-genre">Drama • Emocional • Will Smith</p>
+          </div>
+        </div>
+        
+        <div class="movie-item" onclick="playMovie('1S7JxWV-hAn30HdVthCRU7qx8r4cv-9Fi', 'Interstellar - Viagem no Tempo', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg" alt="Interstellar" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">🚀 INTERSTELLAR</h3>
+            <p class="movie-genre">Ficção • Espaço • Christopher Nolan</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nossos Colaboradores -->
+    <section class="section">
+      <h2 class="section-title">🤝 Nossos Colaboradores & Patrocinadores</h2>
+      <div style="background: rgba(229, 9, 20, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 30px; border: 1px solid rgba(229, 9, 20, 0.3);">
+        <p style="font-size: 1.1em; margin-bottom: 15px; color: #e5e5e5;">
+          🤝 <strong>SEJA UM COLABORADOR/PATROCINADOR!</strong> Por apenas <strong>R$ 7,00/mês</strong> você tem:
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+          <div style="background: rgba(40, 167, 69, 0.1); padding: 15px; border-radius: 8px; border: 1px solid rgba(40, 167, 69, 0.3);">
+            <h4 style="color: #28a745; margin-bottom: 8px;">🎬 ACESSO TOTAL</h4>
+            <p style="color: #e5e5e5; font-size: 0.9em;">Todos os filmes e séries inclusos</p>
+          </div>
+          <div style="background: rgba(255, 193, 7, 0.1); padding: 15px; border-radius: 8px; border: 1px solid rgba(255, 193, 7, 0.3);">
+            <h4 style="color: #ffc107; margin-bottom: 8px;">📺 ESPAÇO PUBLICITÁRIO</h4>
+            <p style="color: #e5e5e5; font-size: 0.9em;">1 minuto de propaganda seus produtos/serviços exibida para usuários básicos</p>
+          </div>
+        </div>
+        <p style="color: #999; font-size: 0.9em;">
+          💼 Ideal para empresários, influencers e negócios locais • 🚀 Suas propagandas aparecerão para usuários básicos
+        </p>
+      </div>
+    </section>
+
+    <!-- Terror -->
+    <section class="section">
+      <h2 class="section-title">😱 Terror</h2>
+      <div class="movies-row" id="horror">
+        <div class="movie-item" onclick="playMovie('1wzqs0z2jYbP3eaqgqe1apoX5wPQaDwHi', 'Terror 1 - Google Drive', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/9E2y5Q7WlCVNEhP5GiVTjhEhx1o.jpg" alt="Terror 1" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">Terror 1</h3>
+            <p class="movie-genre">Terror • Suspense</p>
+          </div>
+        </div>
+        
+        <div class="movie-item" onclick="playMovie('1dxEz9GhAjz4Qx1C9x9fGiItct2GzrLx4', 'Terror 2 - Google Drive', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg" alt="Terror 2" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">Terror 2</h3>
+            <p class="movie-genre">Terror • Horror</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Suspense -->
+    <section class="section">
+      <h2 class="section-title">😨 Suspense</h2>
+      <div class="movies-row" id="suspense">
+        <div class="movie-item" onclick="playMovie('1ZecJhvYvjizHN9qmDvPzvL-O_y8lHB-E', 'Suspense 1 - Google Drive', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg" alt="Suspense 1" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">Suspense 1</h3>
+            <p class="movie-genre">Suspense • Thriller</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comédia -->
+    <section class="section">
+      <h2 class="section-title">🤣 Comédia</h2>
+      <div class="movies-row" id="comedy">
+        <div class="movie-item" onclick="playMovie('1twqz_BgIy3TBp7I2bRZ8mJ-mdcekZkKV', 'Comédia 1 - Google Drive', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="Comédia 1" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">Comédia 1</h3>
+            <p class="movie-genre">Comédia • Humor</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mais Ação -->
+    <section class="section">
+      <h2 class="section-title">🎬 Mais Ação</h2>
+      <div class="movies-row" id="more-action">
+        <div class="movie-item" onclick="playMovie('1ISkNJ6yxb1ooS_o8RLpyteofWKLpMTkM', 'Ação 1 - Google Drive', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg" alt="Ação 1" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">Ação 1</h3>
+            <p class="movie-genre">Ação • Aventura</p>
+          </div>
+        </div>
+        
+        <div class="movie-item" onclick="playMovie('1TqBbXLUGwlhEd5mUW31asw4H2XIHdUun', 'Ação 2 - Google Drive', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg" alt="Ação 2" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">Ação 2</h3>
+            <p class="movie-genre">Ação • Thriller</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Infantil -->
+    <section class="section">
+      <h2 class="section-title">👶 Infantil</h2>
+      <div class="movies-row" id="kids">
+        <div class="movie-item" onclick="playMovie('1u8Qb7cGi2RL-WUiro4te0ZmU0KDBmlvi', 'Toy Story - Aventura dos Brinquedos', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg" alt="Toy Story" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">👶 TOY STORY</h3>
+            <p class="movie-genre">Infantil • Animação • Pixar</p>
+          </div>
+        </div>
+        
+        <div class="movie-item" onclick="playMovie('13pv6SgoyytMV4zSvEACtGPZSMc-iDSWw', 'Harry Potter e a Pedra Filosofal', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg" alt="Harry Potter" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">🪄 HARRY POTTER</h3>
+            <p class="movie-genre">Infantil • Magia • Aventura</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mais Drama -->
+    <section class="section">
+      <h2 class="section-title">🎭 Mais Drama</h2>
+      <div class="movies-row" id="more-drama">
+        <div class="movie-item" onclick="playMovie('1PdxVvxZsnMumiQHNaZCCsYQC4P4S990J', 'Drama 2 - Google Drive', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/e1J2oNzSBdou01sUvriVuoYp0pJ.jpg" alt="Drama 2" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">Drama 2</h3>
+            <p class="movie-genre">Drama • Emocional</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ficção Científica -->
+    <section class="section">
+      <h2 class="section-title">🚀 Ficção Científica</h2>
+      <div class="movies-row" id="sci-fi">
+        <div class="movie-item" onclick="playMovie('1S7JxWV-hAn30HdVthCRU7qx8r4cv-9Fi', 'Sci-Fi 1 - Google Drive', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg" alt="Sci-Fi 1" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">Sci-Fi 1</h3>
+            <p class="movie-genre">Ficção Científica • Futuro</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Para Você -->
+    <section class="section">
+      <h2 class="section-title">🎯 Recomendado Para Você</h2>
+      <div class="movies-row" id="recommended">
+        <div class="movie-item" onclick="playMovie('1u8Qb7cGi2RL-WUiro4te0ZmU0KDBmlvi', 'Infantil 1 - Google Drive', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/rCraXJUKyzaJDGdCUEdwE72VrK9.jpg" alt="Infantil 1" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">👶 INFANTIL 1</h3>
+            <p class="movie-genre">Infantil • Família</p>
+          </div>
+        </div>
+        
+        <div class="movie-item" onclick="playMovie('13pv6SgoyytMV4zSvEACtGPZSMc-iDSWw', 'Infantil 2 - Google Drive', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg" alt="Infantil 2" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">🎈 INFANTIL 2</h3>
+            <p class="movie-genre">Infantil • Aventura</p>
+          </div>
+        </div>
+        
+        <div class="movie-item" onclick="playMovie('1wzqs0z2jYbP3eaqgqe1apoX5wPQaDwHi', 'Terror 1 - Replay', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/9E2y5Q7WlCVNEhP5GiVTjhEhx1o.jpg" alt="Terror 1" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">😱 TERROR CLÁSSICO</h3>
+            <p class="movie-genre">Terror • Clássico</p>
+          </div>
+        </div>
+        
+        <div class="movie-item" onclick="playMovie('1dxEz9GhAjz4Qx1C9x9fGiItct2GzrLx4', 'Terror 2 - Replay', 'drive')">
+          <img src="https://image.tmdb.org/t/p/w500/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg" alt="Terror 2" class="movie-poster">
+          <div class="movie-info">
+            <h3 class="movie-title">👻 HORROR MODERNO</h3>
+            <p class="movie-genre">Terror • Moderno</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Video Overlay -->
+  <div class="video-overlay" id="videoOverlay">
+    <div class="video-container">
+      <button class="close-btn" onclick="closeVideo()">&times;</button>
+      <iframe 
+        id="videoPlayer" 
+        src="" 
+        allowfullscreen 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+function playMovie(videoId, title, source = 'youtube') {
+  // VERIFICAR SE USUÁRIO ESTÁ CADASTRADO E PAGOU
+  const userSubscription = localStorage.getItem('userSubscription');
+  const paymentConfirmed = localStorage.getItem('paymentConfirmed');
+  
+  if (!userSubscription || paymentConfirmed !== 'true') {
+    // BLOQUEAR ACESSO - Usuário não cadastrado ou não pagou
+    showAccessDenied();
+    return;
+  }
+  
+  // Verificar se usuário tem plano premium ou se deve mostrar propaganda
+  const userPlan = localStorage.getItem('userPlan') || 'free';
+  
+  if (userPlan === 'free' || userPlan === 'promotional' || userPlan === 'collaborator') {
+    // Mostrar propaganda primeiro
+    showAdvertisement(() => {
+      startMainVideo(videoId, title, source);
+    }, userPlan);
+  } else {
+    // Usuário premium - reproduzir direto (sem propaganda)
+    startMainVideo(videoId, title, source);
+  }
+}
+
+function showAdvertisement(callback, userPlan = 'free') {
+  const overlay = document.getElementById('videoOverlay');
+  const player = document.getElementById('videoPlayer');
+  
+  let advertisements;
+  
+  if (userPlan === 'collaborator') {
+    // Colaboradores veem suas próprias propagandas como exemplo
+    advertisements = [
+      { id: 'dQw4w9WgXcQ', sponsor: 'SUA EMPRESA', product: 'SEU PRODUTO/SERVIÇO', isOwn: true },
+      { id: 'dQw4w9WgXcQ', sponsor: 'SEU NEGÓCIO', product: 'SUA OFERTA ESPECIAL', isOwn: true }
+    ];
+  } else {
+    // Usuários gratuitos e promocionais veem propagandas dos COLABORADORES que pagam R$ 7,00/mês
+    advertisements = [
+      { id: 'dQw4w9WgXcQ', sponsor: 'Loja do João (Colaborador)', product: 'Roupas e Acessórios - R$ 7/mês para esse espaço' },
+      { id: 'dQw4w9WgXcQ', sponsor: 'Restaurante Maria (Colaborador)', product: 'Delivery Gourmet - Paga R$ 7/mês' },
+      { id: 'dQw4w9WgXcQ', sponsor: 'Tech Solutions (Colaborador)', product: 'Serviços de TI - Investiu R$ 7/mês aqui' },
+      { id: 'dQw4w9WgXcQ', sponsor: 'Academia Forte (Colaborador)', product: 'Mensalidade 50% OFF - Colaborador R$ 7/mês' }
+    ];
+  }
+  
+  const randomAd = advertisements[Math.floor(Math.random() * advertisements.length)];
+  const adUrl = `https://www.youtube.com/embed/${randomAd.id}?autoplay=1&rel=0&modestbranding=1&start=0&end=60`;
+  
+  player.src = adUrl;
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  
+  // Mostrar contador de propaganda com informações do patrocinador
+  showAdCounter(60, callback, randomAd);
+  
+  console.log(`🎬 Reproduzindo propaganda: ${randomAd.sponsor} - ${randomAd.product}`);
+}
+
+function showAdCounter(duration, callback, adInfo) {
+  const container = document.querySelector('.video-container');
+  
+  // Criar elemento do contador
+  const adCounter = document.createElement('div');
+  adCounter.id = 'adCounter';
+  adCounter.style.cssText = `
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(229, 9, 20, 0.9);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    z-index: 1003;
+    backdrop-filter: blur(10px);
+    max-width: 250px;
+    line-height: 1.3;
+  `;
+  
+  // Criar botão "Pular Propaganda" (aparece após 5 segundos)
+  const skipButton = document.createElement('button');
+  skipButton.id = 'skipButton';
+  skipButton.style.cssText = `
+    position: absolute;
+    bottom: 80px;
+    right: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1003;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  `;
+  skipButton.textContent = 'Pular Propaganda ⏭️';
+  skipButton.onclick = () => {
+    clearInterval(countdownInterval);
+    container.removeChild(adCounter);
+    container.removeChild(skipButton);
+    callback();
+  };
+  
+  container.appendChild(adCounter);
+  container.appendChild(skipButton);
+  
+  let timeLeft = duration;
+  const countdownInterval = setInterval(() => {
+    adCounter.innerHTML = `
+      📺 <strong>PROPAGANDA</strong><br>
+      ${adInfo ? `${adInfo.sponsor}<br>${adInfo.product}<br>` : ''}
+      ⏱️ ${timeLeft}s restantes
+    `;
+    
+    // Mostrar botão "Pular" após 5 segundos
+    if (timeLeft <= 55) {
+      skipButton.style.opacity = '1';
+    }
+    
+    timeLeft--;
+    
+    if (timeLeft < 0) {
+      clearInterval(countdownInterval);
+      container.removeChild(adCounter);
+      if (container.contains(skipButton)) {
+        container.removeChild(skipButton);
+      }
+      callback(); // Iniciar vídeo principal
+    }
+  }, 1000);
+}
+
+function startMainVideo(videoId, title, source = 'youtube') {
+  const overlay = document.getElementById('videoOverlay');
+  const player = document.getElementById('videoPlayer');
+  
+  let videoUrl;
+  
+  if (source === 'drive') {
+    // URL do Google Drive
+    videoUrl = `https://drive.google.com/file/d/${videoId}/preview`;
+  } else {
+    // URL do Lorito's Film Hub (YouTube) com autoplay
+    videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+  }
+  
+  player.src = videoUrl;
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  
+  console.log(`Reproduzindo: ${title} (${source === 'drive' ? 'Google Drive' : 'Lorito\'s Film Hub'})`);
+}
+
+function playFeaturedMovie() {
+  playMovie('1wzqs0z2jYbP3eaqgqe1apoX5wPQaDwHi', 'Terror 1 - Filme em Destaque', 'drive');
+}
+
+function closeVideo() {
+  const overlay = document.getElementById('videoOverlay');
+  const player = document.getElementById('videoPlayer');
+  
+  player.src = '';
+  overlay.style.display = 'none';
+  
+  // Restore body scrolling
+  document.body.style.overflow = 'auto';
+}
+
+function showInfo() {
+  alert('🎬 Lorito\'s Film Hub\n\n📺 Mais de 1000 filmes e séries\n🎯 Conteúdo exclusivo e em alta qualidade\n\n💰 PLANOS DISPONÍVEIS:\n🔥 Inscrição: R$ 10,00 (1º mês)\n💎 Premium: R$ 5,00/mês (usuários)\n🤝 Colaborador: R$ 7,00/mês (filmes + espaço publicitário)\n\n📺 COMO FUNCIONA:\n• Usuários básicos veem propagandas dos colaboradores\n• Colaboradores pagam R$ 7,00/mês por 1 min de propaganda\n• Usuários premium (R$ 5,00/mês) não veem propagandas\n\n💼 Ideal para empresários e influencers\n✨ Sua próxima obsessão está aqui!');
+}
+
+// Close video when clicking outside
+document.getElementById('videoOverlay').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeVideo();
+  }
+});
+
+// Close video with ESC key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeVideo();
+  }
+});
+
+// Navigation functions
+function goToLandingPage() {
+  alert('🏠 Redirecionando para Página Inicial...');
+  // window.location.href = 'index.html';
+}
+
+function goToPaymentPage() {
+  const currentSubscription = localStorage.getItem('userSubscription');
+  const paymentConfirmed = localStorage.getItem('paymentConfirmed');
+  
+  if (!currentSubscription) {
+    // Usuário não cadastrado - simular processo completo
+    alert('📝 PASSO 1: Cadastro realizado com sucesso!\n✅ Usuário registrado na plataforma');
+    localStorage.setItem('userSubscription', 'registered');
+    
+    setTimeout(() => {
+      alert('💳 PASSO 2: Redirecionando para página de pagamento...\n\n💰 Escolha seu plano:\n🔥 1º mês: R$ 10,00\n💎 Usuários: R$ 5,00/mês\n🤝 Colaboradores: R$ 7,00/mês');
+      
+      setTimeout(() => {
+        const paymentChoice = confirm('💳 Deseja simular o pagamento aprovado?\n\n✅ SIM = Vídeos liberados\n❌ NÃO = Vídeos continuam bloqueados');
+        
+        if (paymentChoice) {
+          localStorage.setItem('paymentConfirmed', 'true');
+          localStorage.setItem('userPlan', 'promotional');
+          checkUserPlan();
+          alert('🎉 PAGAMENTO CONFIRMADO!\n\n✅ Cadastro: Completo\n✅ Pagamento: Aprovado\n✅ Status: VÍDEOS LIBERADOS!\n\n🎬 Agora você pode assistir todos os filmes!');
+        } else {
+          alert('⏳ Aguardando confirmação do pagamento...\n\n❌ Vídeos continuam bloqueados até o pagamento ser aprovado');
+        }
+      }, 2000);
+    }, 1500);
+    
+  } else if (paymentConfirmed !== 'true') {
+    // Usuário cadastrado mas sem pagamento
+    alert('⚠️ Você já está cadastrado!\n\n💳 Finalize seu pagamento para liberar o acesso aos vídeos');
+    
+    const paymentChoice = confirm('💳 Deseja simular o pagamento aprovado agora?');
+    if (paymentChoice) {
+      localStorage.setItem('paymentConfirmed', 'true');
+      localStorage.setItem('userPlan', 'promotional');
+      checkUserPlan();
+      alert('🎉 PAGAMENTO CONFIRMADO!\n\n✅ Status: VÍDEOS LIBERADOS!\n🎬 Agora você pode assistir todos os filmes!');
+    }
+    
+  } else {
+    // Usuário já tem tudo ok
+    alert('✅ Você já é um assinante ativo!\n\n🎬 Aproveite nosso catálogo completo de filmes e séries!');
+  }
+}
+
+// Smooth scroll for movie rows
+document.querySelectorAll('.movies-row').forEach(row => {
+  let isScrolling = false;
+  let startX = 0;
+  let scrollLeft = 0;
+  
+  row.addEventListener('mousedown', (e) => {
+    isScrolling = true;
+    startX = e.pageX - row.offsetLeft;
+    scrollLeft = row.scrollLeft;
+    row.style.cursor = 'grabbing';
+  });
+  
+  row.addEventListener('mouseleave', () => {
+    isScrolling = false;
+    row.style.cursor = 'grab';
+  });
+  
+  row.addEventListener('mouseup', () => {
+    isScrolling = false;
+    row.style.cursor = 'grab';
+  });
+  
+  row.addEventListener('mousemove', (e) => {
+    if (!isScrolling) return;
+    e.preventDefault();
+    const x = e.pageX - row.offsetLeft;
+    const walk = (x - startX) * 2;
+    row.scrollLeft = scrollLeft - walk;
+  });
+});
+
+// Verificar plano do usuário ao carregar a página
+function checkUserPlan() {
+  const userSubscription = localStorage.getItem('userSubscription');
+  const paymentConfirmed = localStorage.getItem('paymentConfirmed');
+  const userPlan = localStorage.getItem('userPlan') || 'free';
+  const planInfo = document.getElementById('planInfo');
+  const subscriptionBtn = document.querySelector('.subscription-btn');
+  
+  // Verificar status de acesso primeiro
+  if (!userSubscription || paymentConfirmed !== 'true') {
+    planInfo.textContent = '🔒 ACESSO BLOQUEADO';
+    planInfo.style.background = 'rgba(220, 53, 69, 0.1)';
+    planInfo.style.color = '#dc3545';
+    planInfo.style.borderColor = 'rgba(220, 53, 69, 0.3)';
+    subscriptionBtn.textContent = '🚀 ASSINAR AGORA';
+    subscriptionBtn.style.background = '#e50914';
+    subscriptionBtn.style.color = '#fff';
+    return;
+  }
+  
+  switch(userPlan) {
+    case 'promotional':
+      planInfo.textContent = 'Plano: R$ 10,00 (1º mês)';
+      planInfo.style.background = 'rgba(255, 193, 7, 0.1)';
+      planInfo.style.color = '#ffc107';
+      planInfo.style.borderColor = 'rgba(255, 193, 7, 0.3)';
+      subscriptionBtn.textContent = 'Renovar R$ 7,00/mês';
+      break;
+    case 'premium':
+      planInfo.textContent = 'Plano: Premium R$ 5,00/mês';
+      planInfo.style.background = 'rgba(40, 167, 69, 0.1)';
+      planInfo.style.color = '#28a745';
+      planInfo.style.borderColor = 'rgba(40, 167, 69, 0.3)';
+      subscriptionBtn.textContent = 'Plano Ativo ✓';
+      subscriptionBtn.style.background = '#28a745';
+      break;
+    case 'collaborator':
+      planInfo.textContent = 'Colaborador: R$ 7,00/mês';
+      planInfo.style.background = 'rgba(255, 193, 7, 0.1)';
+      planInfo.style.color = '#ffd700';
+      planInfo.style.borderColor = 'rgba(255, 193, 7, 0.3)';
+      subscriptionBtn.textContent = 'Colaborador Ativo ✓';
+      subscriptionBtn.style.background = '#ffd700';
+      subscriptionBtn.style.color = '#000';
+      break;
+    default:
+      planInfo.textContent = 'Plano: Básico';
+      subscriptionBtn.textContent = 'Assinar R$ 10,00';
+  }
+}
+
+// Simular diferentes planos para teste
+function setPlan(planType) {
+  localStorage.setItem('userPlan', planType);
+  checkUserPlan();
+  
+  const messages = {
+    'free': '🆓 Plano Básico - Assista com propagandas dos nossos colaboradores (1 min).',
+    'promotional': '🔥 Primeiro mês por R$ 10,00! Próximos meses: R$ 5,00',
+    'premium': '💎 Plano Premium ativo! Acesso completo aos filmes por R$ 5,00/mês',
+    'collaborator': '🤝 Plano Colaborador ativo! Filmes + espaço para suas propagandas por R$ 7,00/mês'
+  };
+  
+  alert(messages[planType] || 'Plano atualizado!');
+}
+
+// Função para demonstração dos planos (remover em produção)
+function showPlanDemo() {
+  const choice = prompt(`🎬 DEMONSTRAÇÃO DE PLANOS:
+  
+1 - Plano Básico (com propaganda)
+2 - Primeiro Mês R$ 10,00
+3 - Premium R$ 5,00/mês (usuário comum)
+4 - Colaborador R$ 7,00/mês (filmes + propaganda)
+
+Digite o número do plano para testar:`);
+
+  switch(choice) {
+    case '1': setPlan('free'); break;
+    case '2': setPlan('promotional'); break;
+    case '3': setPlan('premium'); break;
+    case '4': setPlan('collaborator'); break;
+    default: alert('Opção inválida!');
+  }
+}
+
+// Atalho para demonstração (Ctrl + Shift + P)
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.shiftKey && e.key === 'P') {
+    showPlanDemo();
+  }
+});
+
+// Função para mostrar acesso negado
+function showAccessDenied() {
+  const overlay = document.getElementById('videoOverlay');
+  const container = document.querySelector('.video-container');
+  
+  // Criar tela de acesso negado
+  const accessDeniedDiv = document.createElement('div');
+  accessDeniedDiv.id = 'accessDenied';
+  accessDeniedDiv.style.cssText = `
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    border-radius: 10px;
+    z-index: 1004;
+  `;
+  
+  accessDeniedDiv.innerHTML = `
+    <div style="background: rgba(229, 9, 20, 0.1); padding: 30px; border-radius: 15px; border: 2px solid #e50914; max-width: 500px;">
+      <h2 style="color: #e50914; font-size: 2.2em; margin-bottom: 20px;">🔒 ACESSO RESTRITO</h2>
+      <p style="color: #fff; font-size: 1.3em; margin-bottom: 25px; line-height: 1.4;">
+        Para assistir nossos filmes você precisa:
+      </p>
+      <div style="text-align: left; margin-bottom: 25px;">
+        <p style="color: #ffc107; margin-bottom: 10px;">✅ <strong>1. Se cadastrar na plataforma</strong></p>
+        <p style="color: #ffc107; margin-bottom: 10px;">✅ <strong>2. Escolher um plano de assinatura</strong></p>
+        <p style="color: #ffc107; margin-bottom: 10px;">✅ <strong>3. Confirmar o pagamento</strong></p>
+      </div>
+      <div style="margin-bottom: 25px; padding: 15px; background: rgba(255, 193, 7, 0.1); border-radius: 8px; border: 1px solid rgba(255, 193, 7, 0.3);">
+        <p style="color: #ffc107; font-size: 1.1em; font-weight: bold;">💰 PLANOS DISPONÍVEIS:</p>
+        <p style="color: #fff; margin: 5px 0;">🔥 1º mês: R$ 10,00</p>
+        <p style="color: #fff; margin: 5px 0;">💎 Usuários: R$ 5,00/mês</p>
+        <p style="color: #fff; margin: 5px 0;">🤝 Colaboradores: R$ 7,00/mês</p>
+      </div>
+      <button onclick="closeAccessDenied(); goToPaymentPage();" style="background: #e50914; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 1.1em; font-weight: bold; cursor: pointer; margin-right: 15px; transition: background 0.3s ease;">
+        💳 ASSINAR AGORA
+      </button>
+      <button onclick="closeAccessDenied();" style="background: #333; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 1.1em; cursor: pointer; transition: background 0.3s ease;">
+        ❌ Fechar
+      </button>
+    </div>
+  `;
+  
+  container.appendChild(accessDeniedDiv);
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAccessDenied() {
+  const accessDenied = document.getElementById('accessDenied');
+  const overlay = document.getElementById('videoOverlay');
+  
+  if (accessDenied) {
+    accessDenied.remove();
+  }
+  
+  overlay.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+// Função para simular cadastro e pagamento (APENAS PARA SEUS TESTES)
+function simulateSubscription() {
+  const choice = prompt(`🎬 SIMULAÇÃO DE CADASTRO/PAGAMENTO (SÓ PARA SEUS TESTES):
+  
+1 - Simular usuário NÃO cadastrado (BLOQUEADO)
+2 - Simular usuário cadastrado mas SEM pagamento (BLOQUEADO)  
+3 - Simular usuário cadastrado e COM pagamento (LIBERADO)
+4 - Resetar para estado inicial
+
+Digite o número da opção:`);
+
+  switch(choice) {
+    case '1':
+      localStorage.removeItem('userSubscription');
+      localStorage.removeItem('paymentConfirmed');
+      alert('❌ Simulando: Usuário NÃO cadastrado - VÍDEOS BLOQUEADOS');
+      break;
+    case '2':
+      localStorage.setItem('userSubscription', 'registered');
+      localStorage.removeItem('paymentConfirmed');
+      alert('⚠️ Simulando: Usuário cadastrado mas SEM pagamento - VÍDEOS BLOQUEADOS');
+      break;
+    case '3':
+      localStorage.setItem('userSubscription', 'registered');
+      localStorage.setItem('paymentConfirmed', 'true');
+      localStorage.setItem('userPlan', 'promotional');
+      checkUserPlan();
+      alert('✅ Simulando: Usuário cadastrado e COM pagamento - VÍDEOS LIBERADOS!');
+      break;
+    case '4':
+      localStorage.removeItem('userSubscription');
+      localStorage.removeItem('paymentConfirmed');
+      localStorage.removeItem('userPlan');
+      checkUserPlan();
+      alert('🔄 Estado resetado para inicial');
+      break;
+    default:
+      alert('Opção inválida!');
+  }
+}
+
+// Atalho para seus testes (Ctrl + Shift + T)
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+    simulateSubscription();
+  }
+});
+
+// Inicializar verificação do plano
+checkUserPlan();
+
+console.log('🎬 Lorito\'s Film Hub - Sistema de controle de acesso ativado!');
+</script>
+</body>
+</html>
