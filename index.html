@@ -1,126 +1,303 @@
-<!-- Cole este código no bloco "HTML Personalizado" no WordPress -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lorito's Film Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('0lPUGP5S3JFYS1B7lixQ2');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      color: #fff;
+    }
+    
+    /* Overlay escuro para melhor legibilidade */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: -1;
+    }
+    header {
+      background-color: #111;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 1.8em;
+      margin: 0;
+      color: #e50914;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .tela {
+      padding: 20px;
+      background-image: url('gYeXcgCZKoVzbkA1jCeY_');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 20px;
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(229, 9, 20, 0.5);
+      position: relative;
+    }
+    
+    /* Overlay nas seções para melhor legibilidade */
+    .tela::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      z-index: 1;
+    }
+    
+    /* Conteúdo das seções acima do overlay */
+    .tela > * {
+      position: relative;
+      z-index: 2;
+    }
+    .tela h2 {
+      color: #e50914;
+    }
+    .botao {
+      background-color: #e50914;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    .botao:hover {
+      background-color: #b00610;
+    }
+    iframe {
+      width: 100%;
+      max-width: 800px;
+      height: 450px;
+      border: none;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+    }
+    footer {
+      background: rgba(17, 17, 17, 0.9);
+      padding: 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #ccc;
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(229, 9, 20, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lorito's Film Hub</h1>
+    <nav>
+      <a href="#tela-planos">Planos</a>
+      <a href="#catalogo">Catálogo</a>
+    </nav>
+  </header>
 
-<header>
-  <img src="https://loritosfilmhub.files.wordpress.com/2025/07/b7c262e9-d202-408b-bfd3-968cb833b9ec.png" alt="Logo">
-  <div class="search-cadastro">
-    <input type="text" placeholder="Buscar filme...">
-    <button>Cadastrar</button>
+  <div class="tela planos" id="tela-planos">
+    <h2>📌 Escolha o seu Plano</h2>
+    <p><strong>Plano Mensal:</strong> R$ 10 na inscrição + R$ 5/mês</p>
+    <p><strong>Patrocinador:</strong> R$ 10/mês (acesso + 1 vídeo de propaganda de 1 minuto)</p>
+    <p>Pagamento via Pix:</p>
+    <p><strong>Chave Pix:</strong> 1c814ae7-453e-470d-a9b4-9b26f1589d1a</p>
+    <p><strong>Banco:</strong> Nubank – Agência: 0001 – Conta: 4654696-6</p>
+    <p><strong>Nome:</strong> Rodrigo Elias De Brito</p>
+    <button class="botao" onclick="document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' })">Acessar Catálogo</button>
   </div>
-</header>
 
-<div class="carrossel">
-  <img src="https://i.imgur.com/YxJ6YOw.jpeg" alt="Destaque 1">
-  <img src="https://i.imgur.com/muIuc5O.jpeg" alt="Destaque 2">
-  <img src="https://i.imgur.com/s4V8vWz.jpeg" alt="Destaque 3">
-</div>
+  <div class="tela" id="catalogo">
+    <h2>🎬 Catálogo de Filmes – Lorito's Film Hub</h2>
+    <p>Aqui estão os destaques disponíveis para você:</p>
+    
+    <!-- FILMES DE AÇÃO - 5 FILMES -->
+    <h3 style="color: #e50914; margin-top: 40px;">🔥 FILMES DE AÇÃO (5 Filmes)</h3>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🎬 November Man: Um Espião Nunca Morre</h4>
+      <p>Ação / Espionagem - Thriller de espionagem intenso!</p>
+      <iframe src="https://drive.google.com/file/d/1drkW6iVduo9ggBpcak2gXqMR4X88qomN/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🎬 VOLTOU DO INFERNO... PARA CUMPRIR A PROMESSA</h4>
+      <p>Ação / Thriller - Uma promessa que nem a morte quebra!</p>
+      <iframe src="https://drive.google.com/file/d/1sf1E3HRkdnJUhKo8wOf3onEBS4noEopY/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🎬 Os X-Mercenários</h4>
+      <p>Ação / Aventura - Dublado em Português!</p>
+      <iframe src="https://drive.google.com/file/d/1LX8QJkct_-3tjY6hHxhjbVhIHtuxM5x0/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🎬 Um juiz implacável destrói criminosos em uma cidade futurista</h4>
+      <p>Ação / Thriller - Filme de ação futurista!</p>
+      <iframe src="https://drive.google.com/file/d/18P6cKjACq1GSGwdF0ZrtkjDvAU8RpGWB/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🎬 Um por Todos - He-Man em Português Dublado</h4>
+      <p>Animação / Aventura - Episódios completos desenhos!</p>
+      <iframe src="https://drive.google.com/file/d/112t_TAp-nPeYtiUWV8AaC_dxzPPglXJl/preview" allowfullscreen></iframe>
+    </div>
+    
+    <!-- FILMES DE TERROR - 4 FILMES -->
+    <h3 style="color: #e50914; margin-top: 40px;">🎃 FILMES DE TERROR (4 Filmes)</h3>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>👻 Melhores Filmes de Terror - Ela Foi Caçar e Virou a Caçada</h4>
+      <p>Terror / Suspense - Filme dublado completo!</p>
+      <iframe src="https://drive.google.com/file/d/15KutIBF-FeA7a8KO44zU4QyxtCbgSXGk/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>👻 A Boneca Maldita</h4>
+      <p>Terror / Sobrenatural - Filme completo dublado 2025!</p>
+      <iframe src="https://drive.google.com/file/d/1ejonkAsuD6a0sNjp2kWCEzYXMYLvFYg5/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>👻 A Freira 1 - Terror Macabro</h4>
+      <p>Terror / Sobrenatural - Filme completo dublado lançamento!</p>
+      <iframe src="https://drive.google.com/file/d/1cxJiC6NcAGljIF8EEBz038_wWLLMfmTA/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>👻 Terror na Escuridão</h4>
+      <p>Terror / Suspense - Filme completo dublado 2025!</p>
+      <iframe src="https://drive.google.com/file/d/1AlaFUzByXIdZLg0sZZna8g37wuwsLJfI/preview" allowfullscreen></iframe>
+    </div>
+    
+    <!-- FILMES DE COMÉDIA - 4 FILMES -->
+    <h3 style="color: #e50914; margin-top: 40px;">😂 FILMES DE COMÉDIA (4 Filmes)</h3>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🤣 Casa Comigo, Cara</h4>
+      <p>Comédia / Romance - Filme completo dublado!</p>
+      <iframe src="https://drive.google.com/file/d/1wzqs0z2jYbP3eaqgqe1apoX5wPQaDwHi/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🤣 Tá Todo Mundo Louco!</h4>
+      <p>Comédia / Humor - Melhor filme de comédia!</p>
+      <iframe src="https://drive.google.com/file/d/1aQyxOYRvqKS9XFRJXkPBk2YJ_Kf2DxTF/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🤣 Os X-Mercenários - Dublado Português</h4>
+      <p>Ação / Aventura - Filme completo de ação!</p>
+      <iframe src="https://drive.google.com/file/d/1LX8QJkct_-3tjY6hHxhjbVhIHtuxM5x0/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🤣 Férias Trocadas</h4>
+      <p>Comédia / Família - Filme completo dublado!</p>
+      <iframe src="https://drive.google.com/file/d/1WnbbOCOetitlsQl71GhKs9GXhRjgkUcH/preview" allowfullscreen></iframe>
+    </div>
+    
+    <!-- FILMES DE ROMANCE - 3 FILMES -->
+    <h3 style="color: #e50914; margin-top: 40px;">💕 FILMES DE ROMANCE (3 Filmes)</h3>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>❤️ ELA O SEDUZIU... DEPOIS O ACUSOU!</h4>
+      <p>Romance / Drama - Romance proibido nas férias escolares!</p>
+      <iframe src="https://drive.google.com/file/d/112t_TAp-nPeYtiUWV8AaC_dxzPPglXJl/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>❤️ Presos em Cápsula no Fundo do Mar</h4>
+      <p>Ficção Científica / Suspense - Filmes dublados em Português!</p>
+      <iframe src="https://drive.google.com/file/d/1PdxVvxZsnMumiQHNaZCCsYQC4P4S990J/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>❤️ Ela Viaja Através dos Mundos</h4>
+      <p>Ficção Científica / Aventura - Filme completo dublado!</p>
+      <iframe src="https://drive.google.com/file/d/1ftpAdMM85oXIBmovwUhUa_ZjoHp-gOtL/preview" allowfullscreen></iframe>
+    </div>
+    
+    <!-- FILMES DE DRAMA - 4 FILMES -->
+    <h3 style="color: #e50914; margin-top: 40px;">🎭 FILMES DE DRAMA (4 Filmes)</h3>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🎭 VALE MUITO A PENA ASSISTIR! - THE ARRIVAL</h4>
+      <p>Ficção Científica / Suspense - Especialmente se você ama Sci-Fi!</p>
+      <iframe src="https://drive.google.com/file/d/1Zq98i4iGnK7tIA5QD2oh3Gn-GWryWu6r/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🎭 A Jornada de Khumba - Muda Tudo ao Redor</h4>
+      <p>Animação / Família - Filmes completos dublados!</p>
+      <iframe src="https://drive.google.com/file/d/1S7JxWV-hAn30HdVthCRU7qx8r4cv-9Fi/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🎭 Leprechaun Origins</h4>
+      <p>Terror / Fantasia - Filme completo!</p>
+      <iframe src="https://drive.google.com/file/d/1O3nZW6hER4l0X_-scCMb_q9zLTXuoG7W/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🎭 O Retorno do Palhaço Macabro</h4>
+      <p>Terror / Suspense - Filme completo!</p>
+      <iframe src="https://drive.google.com/file/d/1ZecJhvYvjizHN9qmDvPzvL-O_y8lHB-E/preview" allowfullscreen></iframe>
+    </div>
+    
+    <!-- FILMES DE FICÇÃO CIENTÍFICA - 3 FILMES -->
+    <h3 style="color: #e50914; margin-top: 40px;">🚀 FILMES DE FICÇÃO CIENTÍFICA (3 Filmes)</h3>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🚀 Despertar do Caos</h4>
+      <p>Ficção Científica / Suspense - Filme completo dublado!</p>
+      <iframe src="https://drive.google.com/file/d/1Xkf57SISjnF-3qEhmhU4xqDdekVxdDaW/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🚀 Sol Eterno</h4>
+      <p>Ficção Científica / Suspense - Filme completo dublado!</p>
+      <iframe src="https://drive.google.com/file/d/1iER9m11eGzd3fe41oRuCWqaj385icSE0/preview" allowfullscreen></iframe>
+    </div>
+    
+    <div style="margin-bottom: 30px;">
+      <h4>🚀 Melhor Filme de Ficção Científica - Cloud Atlas</h4>
+      <p>Ficção Científica / Drama - Filmes dublados em Português!</p>
+      <iframe src="https://drive.google.com/file/d/1TqBbXLUGwlhEd5mUW31asw4H2XIHdUun/preview" allowfullscreen></iframe>
+    </div>
+  </div>
 
-<div class="genero">
-  <h2>🔥 Ação</h2>
-  <div class="filme"><iframe src="https://drive.google.com/file/d/1TqBbXLUGwlhEd5mUW31asw4H2XIHdUun/preview" allowfullscreen></iframe></div>
-  <div class="filme"><iframe src="https://drive.google.com/file/d/1drkW6iVduo9ggBpcak2gXqMR4X88qomN/preview" allowfullscreen></iframe></div>
-  <div class="filme"><iframe src="https://drive.google.com/file/d/1ejonkAsuD6a0sNjp2kWCEzYXMYLvFYg5/preview" allowfullscreen></iframe></div>
-</div>
-
-<div class="genero">
-  <h2>🎃 Terror</h2>
-  <div class="filme"><iframe src="https://drive.google.com/file/d/15KutIBF-FeA7a8KO44zU4QyxtCbgSXGk/preview" allowfullscreen></iframe></div>
-  <div class="filme"><iframe src="https://drive.google.com/file/d/1nelShntok7UMBUROVgkEOdqiwcUAhTlV/preview" allowfullscreen></iframe></div>
-</div>
-
-<div class="genero">
-  <h2>🎭 Drama</h2>
-  <div class="filme"><iframe src="https://drive.google.com/file/d/1aQyxOYRvqKS9XFRJXkPBk2YJ_Kf2DxTF/preview" allowfullscreen></iframe></div>
-  <div class="filme"><iframe src="https://drive.google.com/file/d/1cxJiC6NcAGljIF8EEBz038_wWLLMfmTA/preview" allowfullscreen></iframe></div>
-  <div class="filme"><iframe src="https://drive.google.com/file/d/1AlaFUzByXIdZLg0sZZna8g37wuwsLJfI/preview" allowfullscreen></iframe></div>
-  <div class="filme"><iframe src="https://drive.google.com/file/d/1wzqs0z2jYbP3eaqgqe1apoX5wPQaDwHi/preview" allowfullscreen></iframe></div>
-  <div class="filme"><iframe src="https://drive.google.com/file/d/139pPUMREcW3ySx5ooDswTJC3VyARK4TW/preview" allowfullscreen></iframe></div>
-</div>
-
-<div class="cadastro-banner">
-  Cadastre-se no Plano Premium
-</div>
-
-<!-- Agora cole esse CSS em "Aparência > Personalizar > CSS adicional" -->
-
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: Arial, sans-serif;
-    background-image: url('https://loritosfilmhub.files.wordpress.com/2025/07/58edc4c6-119d-4763-8065-e49e74848d29.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    color: #fff;
-  }
-  header {
-    background: rgba(0, 0, 0, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 30px;
-  }
-  header img {
-    height: 70px;
-  }
-  .search-cadastro {
-    display: flex;
-    gap: 10px;
-  }
-  .search-cadastro input {
-    padding: 8px;
-    border-radius: 5px;
-    border: none;
-    width: 200px;
-  }
-  .search-cadastro button {
-    padding: 8px 15px;
-    background: #ffc107;
-    color: black;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .carrossel {
-    display: flex;
-    overflow: auto;
-    gap: 15px;
-    padding: 20px 30px;
-    scroll-behavior: smooth;
-  }
-  .carrossel img {
-    height: 220px;
-    border-radius: 10px;
-    flex-shrink: 0;
-  }
-  .genero {
-    padding: 30px;
-    background-color: rgba(0, 0, 0, 0.75);
-    margin: 30px;
-    border-radius: 10px;
-  }
-  .genero h2 {
-    color: #ffc107;
-    margin-bottom: 20px;
-  }
-  .filme {
-    margin-bottom: 20px;
-  }
-  iframe {
-    width: 100%;
-    height: 480px;
-    border: none;
-    border-radius: 5px;
-  }
-  .cadastro-banner {
-    text-align: center;
-    background: #ffc107;
-    color: #000;
-    padding: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    margin: 30px auto;
-    width: fit-content;
-    border-radius: 5px;
-  }
-</style>
+  <footer>
+    &copy; 2025 Lorito's Film Hub – Todos os direitos reservados.<br>
+    Contato: Rodrigo Elias De Brito | Pagamento via Pix: 1c814ae7-453e-470d-a9b4-9b26f1589d1a
+  </footer>
+</body>
+</html>
