@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo - Lorito's Film Hub</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lorito's Film Hub – Catálogo</title>
   <style>
     body {
       margin: 0;
@@ -16,101 +16,160 @@
       padding: 20px;
       text-align: center;
     }
-    h1 {
-      margin: 0;
+    header h1 {
       color: #e50914;
     }
     .genero {
-      padding: 40px 20px;
+      padding: 30px 20px;
     }
     .genero h2 {
-      border-left: 6px solid #e50914;
-      padding-left: 10px;
+      color: #e50914;
+      margin-bottom: 20px;
     }
-    .filmes {
+    .grid-filmes {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
     }
     .filme {
-      background-color: #111;
+      background-color: #1c1c1c;
       border-radius: 8px;
       overflow: hidden;
-      width: 180px;
+      width: 200px;
       text-align: center;
     }
     .filme img {
       width: 100%;
-      display: block;
+      height: 300px;
+      object-fit: cover;
+    }
+    .filme h3 {
+      margin: 10px 0 5px;
+      font-size: 1em;
     }
     .filme button {
       background-color: #e50914;
-      color: #fff;
       border: none;
-      padding: 8px;
-      width: 100%;
+      padding: 8px 12px;
+      color: white;
+      margin-bottom: 10px;
+      border-radius: 4px;
       cursor: pointer;
-      font-weight: bold;
     }
     .filme button:hover {
       background-color: #b00610;
     }
-    #player {
-      margin: 40px auto;
-      max-width: 800px;
-      width: 100%;
-    }
-    iframe {
-      width: 100%;
-      height: 450px;
-      border: none;
+    footer {
+      background-color: #111;
+      padding: 20px;
+      text-align: center;
+      color: #ccc;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>🎬 Catálogo de Filmes - Lorito's Film Hub</h1>
-    <p>Assista agora aos seus filmes favoritos!</p>
+    <h1>🎬 Lorito's Film Hub – Catálogo</h1>
+    <p>Escolha um filme e aproveite!</p>
   </header>
 
-  <div id="player"></div>
-
-  <section class="genero">
-    <h2>🎃 Terror</h2>
-    <div class="filmes">
-      <div class="filme">
-        <img src="https://i.imgur.com/v8Zb6Zy.jpg" alt="Terror 1">
-        <button onclick="assistir('https://drive.google.com/file/d/1Mgh9M0Pb5LnubHtAYq9F7MHnRplFbYul/preview')">Assistir</button>
-      </div>
+  <!-- 🔥 DESTAQUES -->
+  <div class="genero">
+    <h2>🔥 Destaques</h2>
+    <div class="grid-filmes">
+      <div class="filme"><img src="https://i.imgur.com/3ujF5N7.jpg"><h3>Filme 1</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1LX8QJkct_-3tjY6hHxhjbVhIHtuxM5x0/preview')">Assistir</button></div>
+      <div class="filme"><img src="https://i.imgur.com/hOemFUU.jpg"><h3>Filme 2</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1ftpAdMM85oXIBmovwUhUa_ZjoHp-gOtL/preview')">Assistir</button></div>
+      <div class="filme"><img src="https://i.imgur.com/6nGj6Cw.jpg"><h3>Filme 3</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1AlaFUzByXIdZLg0sZZna8g37wuwsLJfI/preview')">Assistir</button></div>
     </div>
-  </section>
+  </div>
 
-  <section class="genero">
-    <h2>🔥 Ação</h2>
-    <div class="filmes">
-      <div class="filme">
-        <img src="https://i.imgur.com/jKsmBpi.jpg" alt="Ação 1">
-        <button onclick="assistir('https://drive.google.com/file/d/1dpPqmgOaZKXcJpZNhSDe5RypGFTUNpOa/preview')">Assistir</button>
-      </div>
+  <!-- 🎨 ANIMAÇÃO -->
+  <div class="genero">
+    <h2>🎨 Animação</h2>
+    <div class="grid-filmes">
+      <div class="filme"><img src="https://i.imgur.com/PLn2WIT.jpg"><h3>Desenho 1</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1Xkf57SISjnF-3qEhmhU4xqDdekVxdDaW/preview')">Assistir</button></div>
+      <div class="filme"><img src="https://i.imgur.com/8YJYFJj.jpg"><h3>Desenho 2</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1Zq98i4iGnK7tIA5QD2oh3Gn-GWryWu6r/preview')">Assistir</button></div>
     </div>
-  </section>
+  </div>
 
-  <section class="genero">
+  <!-- 💖 ROMANCE -->
+  <div class="genero">
+    <h2>💖 Romance</h2>
+    <div class="grid-filmes">
+      <div class="filme"><img src="https://i.imgur.com/hgwqMQ3.jpg"><h3>Romance 1</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1aQyxOYRvqKS9XFRJXkPBk2YJ_Kf2DxTF/preview')">Assistir</button></div>
+      <div class="filme"><img src="https://i.imgur.com/jAhKjBi.jpg"><h3>Romance 2</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1ZRH8jfnFFULMc_uu-iUzSdbOM0fMasst/preview')">Assistir</button></div>
+    </div>
+  </div>
+
+  <!-- 🔫 AÇÃO -->
+  <div class="genero">
+    <h2>🔫 Ação</h2>
+    <div class="grid-filmes">
+      <div class="filme"><img src="https://i.imgur.com/wI6N2Jr.jpg"><h3>Ação 1</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1ISkNJ6yxb1ooS_o8RLpyteofWKLpMTkM/preview')">Assistir</button></div>
+      <div class="filme"><img src="https://i.imgur.com/x1wL7Mx.jpg"><h3>Ação 2</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/18P6cKjACq1GSGwdF0ZrtkjDvAU8RpGWB/preview')">Assistir</button></div>
+    </div>
+  </div>
+
+  <!-- 😱 TERROR -->
+  <div class="genero">
+    <h2>😱 Terror</h2>
+    <div class="grid-filmes">
+      <div class="filme"><img src="https://i.imgur.com/BXy2F8d.jpg"><h3>Terror 1</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1drkW6iVduo9ggBpcak2gXqMR4X88qomN/preview')">Assistir</button></div>
+    </div>
+  </div>
+
+  <!-- 🕵️ SUSPENSE -->
+  <div class="genero">
+    <h2>🕵️ Suspense</h2>
+    <div class="grid-filmes">
+      <div class="filme"><img src="https://i.imgur.com/V3DjvTI.jpg"><h3>Suspense 1</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1twqz_BgIy3TBp7I2bRZ8mJ-mdcekZkKV/preview')">Assistir</button></div>
+      <div class="filme"><img src="https://i.imgur.com/Y0UM4sA.jpg"><h3>Suspense 2</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1wzqs0z2jYbP3eaqgqe1apoX5wPQaDwHi/preview')">Assistir</button></div>
+    </div>
+  </div>
+
+  <!-- 😂 COMÉDIA -->
+  <div class="genero">
+    <h2>😂 Comédia</h2>
+    <div class="grid-filmes">
+      <div class="filme"><img src="https://i.imgur.com/I7mE8zK.jpg"><h3>Comédia 1</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1cxJiC6NcAGljIF8EEBz038_wWLLMfmTA/preview')">Assistir</button></div>
+    </div>
+  </div>
+
+  <!-- 👶 INFANTIL -->
+  <div class="genero">
+    <h2>👶 Infantil</h2>
+    <div class="grid-filmes">
+      <div class="filme"><img src="https://i.imgur.com/I7mE8zK.jpg"><h3>Infantil 1</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1u8Qb7cGi2RL-WUiro4te0ZmU0KDBmlvi/preview')">Assistir</button></div>
+      <div class="filme"><img src="https://i.imgur.com/V3DjvTI.jpg"><h3>Infantil 2</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/13pv6SgoyytMV4zSvEACtGPZSMc-iDSWw/preview')">Assistir</button></div>
+    </div>
+  </div>
+
+  <!-- 🎭 DRAMA -->
+  <div class="genero">
     <h2>🎭 Drama</h2>
-    <div class="filmes">
-      <div class="filme">
-        <img src="https://i.imgur.com/NZ7MyBf.jpg" alt="Drama 1">
-        <button onclick="assistir('https://drive.google.com/file/d/1VrJkfxvAJVp5tqgDR8U2MNiTJ0Aec90j/preview')">Assistir</button>
-      </div>
+    <div class="grid-filmes">
+      <div class="filme"><img src="https://i.imgur.com/YY1ClB6.jpg"><h3>Drama 2</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1PdxVvxZsnMumiQHNaZCCsYQC4P4S990J/preview')">Assistir</button></div>
     </div>
-  </section>
+  </div>
+
+  <!-- 🚀 FICÇÃO CIENTÍFICA -->
+  <div class="genero">
+    <h2>🚀 Ficção Científica</h2>
+    <div class="grid-filmes">
+      <div class="filme"><img src="https://i.imgur.com/zlcl0us.jpg"><h3>Sci-Fi 1</h3><button onclick="abrirPlayer('https://drive.google.com/file/d/1S7JxWV-hAn30HdVthCRU7qx8r4cv-9Fi/preview')">Assistir</button></div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Lorito's Film Hub – Todos os direitos reservados.<br>
+    Contato: Rodrigo Elias De Brito | Pix: 1c814ae7-453e-470d-a9b4-9b26f1589d1a
+  </footer>
 
   <script>
-    function assistir(link) {
-      const player = document.getElementById('player');
-      player.innerHTML = `<iframe src="${link}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-      player.scrollIntoView({ behavior: 'smooth' });
+    function abrirPlayer(url) {
+      window.open(url, '_blank');
     }
   </script>
 </body>
