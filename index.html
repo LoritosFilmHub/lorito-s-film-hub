@@ -1,196 +1,96 @@
-<div class='loritos-film-hub'>
-  <style type='text/css'>
-    .loritos-film-hub {
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lorito's Film Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
       background-color: #000;
       color: #fff;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
     }
-    .loritos-film-hub header {
+    header {
       background-color: #111;
-      padding: 20px;
-      text-align: center;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    .loritos-film-hub header h1 {
-      color: #e50914;
+    header h1 {
+      color: red;
+      font-size: 2rem;
+      font-family: 'Impact', sans-serif;
       margin: 0;
     }
-    .loritos-film-hub .genero {
-      padding: 30px 20px;
+    section {
+      padding: 2rem;
     }
-    .loritos-film-hub .genero h2 {
-      color: #e50914;
-      margin-bottom: 20px;
-      font-size: 1.5em;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
     }
-    .loritos-film-hub .grid-filmes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-    .loritos-film-hub .filme {
-      background-color: #1c1c1c;
-      border-radius: 8px;
+    .movie {
+      background-color: #222;
+      border-radius: 10px;
       overflow: hidden;
-      width: 200px;
-      text-align: center;
-      transition: transform 0.3s ease;
+      transition: transform 0.2s;
     }
-    .loritos-film-hub .filme:hover {
+    .movie:hover {
       transform: scale(1.05);
     }
-    .loritos-film-hub .filme img {
+    .movie iframe {
       width: 100%;
-      height: 300px;
-      object-fit: cover;
-      display: block;
+      height: 200px;
     }
-    .loritos-film-hub .filme h3 {
-      margin: 10px 0 5px;
-      font-size: 1em;
-      padding: 0 10px;
-    }
-    .loritos-film-hub .filme button {
-      background-color: #e50914;
-      border: none;
-      padding: 8px 12px;
-      color: white;
-      margin-bottom: 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-    .loritos-film-hub .filme button:hover {
-      background-color: #b00610;
-    }
-    .loritos-film-hub footer {
-      background-color: #111;
-      padding: 20px;
+    footer {
       text-align: center;
-      color: #ccc;
-      font-size: 14px;
-      margin-top: 30px;
-    }
-    
-    @media (max-width: 768px) {
-      .loritos-film-hub .filme {
-        width: 150px;
-      }
-      .loritos-film-hub .filme img {
-        height: 225px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .loritos-film-hub .filme {
-        width: 120px;
-      }
-      .loritos-film-hub .filme img {
-        height: 180px;
-      }
-      .loritos-film-hub .genero h2 {
-        font-size: 1.3em;
-      }
+      padding: 1rem;
+      background: #111;
+      font-size: 0.9rem;
     }
   </style>
-
+</head>
+<body>
   <header>
-    <h1>🎬 Lorito's Film Hub – Catálogo</h1>
-    <p>Escolha um filme e aproveite!</p>
+    <h1>Lorito's Film Hub</h1>
   </header>
 
-  <!-- 🔥 DESTAQUES -->
-  <div class="genero">
-    <h2>🔥 Destaques</h2>
-    <div class="grid-filmes">
-      <div class="filme"><img src="https://i.imgur.com/3ujF5N7.jpg" alt="Filme 1"/><h3>Filme 1</h3><button onclick="window.open('https://drive.google.com/file/d/1LX8QJkct_-3tjY6hHxhjbVhIHtuxM5x0/preview', '_blank')">Assistir</button></div>
-      <div class="filme"><img src="https://i.imgur.com/hOemFUU.jpg" alt="Filme 2"/><h3>Filme 2</h3><button onclick="window.open('https://drive.google.com/file/d/1ftpAdMM85oXIBmovwUhUa_ZjoHp-gOtL/preview', '_blank')">Assistir</button></div>
-      <div class="filme"><img src="https://i.imgur.com/6nGj6Cw.jpg" alt="Filme 3"/><h3>Filme 3</h3><button onclick="window.open('https://drive.google.com/file/d/1AlaFUzByXIdZLg0sZZna8g37wuwsLJfI/preview', '_blank')">Assistir</button></div>
+  <section>
+    <h2>🎬 Desenhos Animados Antigos</h2>
+    <div class="grid">
+      <div class="movie">
+        <iframe src="https://archive.org/embed/jonny_quest_classic" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="movie">
+        <iframe src="https://archive.org/embed/looneytunes1930s" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="movie">
+        <iframe src="https://archive.org/embed/Thundercats_Complete" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="movie">
+        <iframe src="https://archive.org/embed/the_mightor_cartoon_classics" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="movie">
+        <iframe src="https://www.youtube.com/embed/Hcz2Q0T6G1s" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="movie">
+        <iframe src="https://www.youtube.com/embed/kvKjBmlU4X8" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="movie">
+        <iframe src="https://www.youtube.com/embed/QE7kF2rD3iI" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
-  </div>
-
-  <!-- 🎨 ANIMAÇÃO -->
-  <div class="genero">
-    <h2>🎨 Animação</h2>
-    <div class="grid-filmes">
-      <div class="filme"><img src="https://i.imgur.com/PLn2WIT.jpg" alt="Desenho 1"/><h3>Desenho 1</h3><button onclick="window.open('https://drive.google.com/file/d/1Xkf57SISjnF-3qEhmhU4xqDdekVxdDaW/preview', '_blank')">Assistir</button></div>
-      <div class="filme"><img src="https://i.imgur.com/8YJYFJj.jpg" alt="Desenho 2"/><h3>Desenho 2</h3><button onclick="window.open('https://drive.google.com/file/d/1Zq98i4iGnK7tIA5QD2oh3Gn-GWryWu6r/preview', '_blank')">Assistir</button></div>
-    </div>
-  </div>
-
-  <!-- 💖 ROMANCE -->
-  <div class="genero">
-    <h2>💖 Romance</h2>
-    <div class="grid-filmes">
-      <div class="filme"><img src="https://i.imgur.com/hgwqMQ3.jpg" alt="Romance 1"/><h3>Romance 1</h3><button onclick="window.open('https://drive.google.com/file/d/1aQyxOYRvqKS9XFRJXkPBk2YJ_Kf2DxTF/preview', '_blank')">Assistir</button></div>
-      <div class="filme"><img src="https://i.imgur.com/jAhKjBi.jpg" alt="Romance 2"/><h3>Romance 2</h3><button onclick="window.open('https://drive.google.com/file/d/1ZRH8jfnFFULMc_uu-iUzSdbOM0fMasst/preview', '_blank')">Assistir</button></div>
-    </div>
-  </div>
-
-  <!-- 🔫 AÇÃO -->
-  <div class="genero">
-    <h2>🔫 Ação</h2>
-    <div class="grid-filmes">
-      <div class="filme"><img src="https://i.imgur.com/wI6N2Jr.jpg" alt="Ação 1"/><h3>Ação 1</h3><button onclick="window.open('https://drive.google.com/file/d/1ISkNJ6yxb1ooS_o8RLpyteofWKLpMTkM/preview', '_blank')">Assistir</button></div>
-      <div class="filme"><img src="https://i.imgur.com/x1wL7Mx.jpg" alt="Ação 2"/><h3>Ação 2</h3><button onclick="window.open('https://drive.google.com/file/d/18P6cKjACq1GSGwdF0ZrtkjDvAU8RpGWB/preview', '_blank')">Assistir</button></div>
-    </div>
-  </div>
-
-  <!-- 😱 TERROR -->
-  <div class="genero">
-    <h2>😱 Terror</h2>
-    <div class="grid-filmes">
-      <div class="filme"><img src="https://i.imgur.com/BXy2F8d.jpg" alt="Terror 1"/><h3>Terror 1</h3><button onclick="window.open('https://drive.google.com/file/d/1drkW6iVduo9ggBpcak2gXqMR4X88qomN/preview', '_blank')">Assistir</button></div>
-    </div>
-  </div>
-
-  <!-- 🕵️ SUSPENSE -->
-  <div class="genero">
-    <h2>🕵️ Suspense</h2>
-    <div class="grid-filmes">
-      <div class="filme"><img src="https://i.imgur.com/V3DjvTI.jpg" alt="Suspense 1"/><h3>Suspense 1</h3><button onclick="window.open('https://drive.google.com/file/d/1twqz_BgIy3TBp7I2bRZ8mJ-mdcekZkKV/preview', '_blank')">Assistir</button></div>
-      <div class="filme"><img src="https://i.imgur.com/Y0UM4sA.jpg" alt="Suspense 2"/><h3>Suspense 2</h3><button onclick="window.open('https://drive.google.com/file/d/1wzqs0z2jYbP3eaqgqe1apoX5wPQaDwHi/preview', '_blank')">Assistir</button></div>
-    </div>
-  </div>
-
-  <!-- 😂 COMÉDIA -->
-  <div class="genero">
-    <h2>😂 Comédia</h2>
-    <div class="grid-filmes">
-      <div class="filme"><img src="https://i.imgur.com/I7mE8zK.jpg" alt="Comédia 1"/><h3>Comédia 1</h3><button onclick="window.open('https://drive.google.com/file/d/1cxJiC6NcAGljIF8EEBz038_wWLLMfmTA/preview', '_blank')">Assistir</button></div>
-    </div>
-  </div>
-
-  <!-- 👶 INFANTIL -->
-  <div class="genero">
-    <h2>👶 Infantil</h2>
-    <div class="grid-filmes">
-      <div class="filme"><img src="https://i.imgur.com/I7mE8zK.jpg" alt="Infantil 1"/><h3>Infantil 1</h3><button onclick="window.open('https://drive.google.com/file/d/1u8Qb7cGi2RL-WUiro4te0ZmU0KDBmlvi/preview', '_blank')">Assistir</button></div>
-      <div class="filme"><img src="https://i.imgur.com/V3DjvTI.jpg" alt="Infantil 2"/><h3>Infantil 2</h3><button onclick="window.open('https://drive.google.com/file/d/13pv6SgoyytMV4zSvEACtGPZSMc-iDSWw/preview', '_blank')">Assistir</button></div>
-    </div>
-  </div>
-
-  <!-- 🎭 DRAMA -->
-  <div class="genero">
-    <h2>🎭 Drama</h2>
-    <div class="grid-filmes">
-      <div class="filme"><img src="https://i.imgur.com/YY1ClB6.jpg" alt="Drama 2"/><h3>Drama 2</h3><button onclick="window.open('https://drive.google.com/file/d/1PdxVvxZsnMumiQHNaZCCsYQC4P4S990J/preview', '_blank')">Assistir</button></div>
-    </div>
-  </div>
-
-  <!-- 🚀 FICÇÃO CIENTÍFICA -->
-  <div class="genero">
-    <h2>🚀 Ficção Científica</h2>
-    <div class="grid-filmes">
-      <div class="filme"><img src="https://i.imgur.com/zlcl0us.jpg" alt="Sci-Fi 1"/><h3>Sci-Fi 1</h3><button onclick="window.open('https://drive.google.com/file/d/1S7JxWV-hAn30HdVthCRU7qx8r4cv-9Fi/preview', '_blank')">Assistir</button></div>
-    </div>
-  </div>
+  </section>
 
   <footer>
     Copyright © 2025 Lorito's Film Hub – Todos os direitos reservados.<br>
-    Contato: Rodrigo Elias De Brito | Pix: 1c814ae7-453e-470d-a9b4-9b26f1589d1a
+    Contato: Rodrigo Elias De Brito | Pix: 1c814ae7-453e-470d-a9b4-9b26f1589d1a<br>
+    (minha conta na Nubank – agência 0001, conta 4654696-6, banco 0260)<br>
+    Plano Básico (R$5/mês via Pix ou cartão de crédito/débito)<br>
+    Plano Patrocinador (R$10/mês com propagandas de 1 minuto)
   </footer>
-</div>
+</body>
+</html>
