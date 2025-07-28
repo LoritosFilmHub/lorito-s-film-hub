@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lorito's Film Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    header {
+      background-color: #111;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header h1 {
+      color: red;
+      font-size: 2rem;
+      font-family: 'Impact', sans-serif;
+      margin: 0;
+    }
+    section {
+      padding: 2rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    .movie {
+      background-color: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .movie:hover {
+      transform: scale(1.05);
+    }
+    .movie iframe {
+      width: 100%;
+      height: 200px;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #111;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lorito's Film Hub</h1>
+  </header>
+
+  <section>
+    <h2>🎬 Desenhos Animados Antigos</h2>
+    <div class="grid">
+      <div class="movie">
+        <iframe src="https://archive.org/embed/jonny_quest_classic" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="movie">
+        <iframe src="https://archive.org/embed/looneytunes1930s" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="movie">
+        <iframe src="https://archive.org/embed/Thundercats_Complete" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="movie">
+        <iframe src="https://archive.org/embed/the_mightor_cartoon_classics" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="movie">
+        <iframe src="https://www.youtube.com/embed/Hcz2Q0T6G1s" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="movie">
+        <iframe src="https://www.youtube.com/embed/kvKjBmlU4X8" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="movie">
+        <iframe src="https://www.youtube.com/embed/QE7kF2rD3iI" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Copyright © 2025 Lorito's Film Hub – Todos os direitos reservados.<br>
+    Contato: Rodrigo Elias De Brito | Pix: 1c814ae7-453e-470d-a9b4-9b26f1589d1a<br>
+    (minha conta na Nubank – agência 0001, conta 4654696-6, banco 0260)<br>
+    Plano Básico (R$5/mês via Pix ou cartão de crédito/débito)<br>
+    Plano Patrocinador (R$10/mês com propagandas de 1 minuto)
+  </footer>
+</body>
+</html>
