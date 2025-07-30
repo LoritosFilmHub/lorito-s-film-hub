@@ -1,88 +1,72 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Lorito’s Film Hub</title>
-  <style>
-    body { margin:0; font-family: sans-serif; background:#f4f4f4; color:#333; }
-    header { background:#333; color:#fff; padding:1rem; text-align:center; }
-    .container { max-width:1200px; margin:1rem auto; padding:0 1rem; }
-    .grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap:1rem; }
-    .card { background:#fff; border-radius:8px; overflow:hidden; display:flex; flex-direction:column; }
-    .card img { width:100%; height:auto; display:block; }
-    .card-content { padding:0.5rem; flex:1; display:flex; flex-direction:column; }
-    .card-content h3 { margin:0 0 0.5rem; font-size:1.1rem; }
-    .card-content p { margin:0 0 1rem; flex:1; font-size:0.9rem; }
-    .card-content button { background:#333; color:#fff; border:none; padding:0.5rem; cursor:pointer; border-radius:4px; }
-    .card-content button:hover { background:#555; }
-    @media(min-width:600px){ header h1 { font-size:2rem; } }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Lorito’s Film Hub</h1>
-    <p>Confira os filmes mais populares com estilo!</p>
-  </header>
-  <div class="container">
-    <div id="films" class="grid">
-      <!-- Cards vão aqui -->
-    </div>
-  </div>
-
-  <script>
-    const films = [
-      {
-        title: "Deadpool & Wolverine",
-        poster: "https://via.placeholder.com/300x450?text=Deadpool+%26+Wolverine",
-        description: "Ação / Comédia – Disponível no Disney Plus.",
-        url: "#"
-      },
-      {
-        title: "Dune: Part Two",
-        poster: "https://via.placeholder.com/300x450?text=Dune:+Part+Two",
-        description: "Sci‑Fi / Aventura – Assista no Netflix ou Binge.",
-        url: "#"
-      },
-      {
-        title: "Inside Out 2",
-        poster: "https://via.placeholder.com/300x450?text=Inside+Out+2",
-        description: "Animação – Disney Pixar, no Disney Plus.",
-        url: "#"
-      },
-      {
-        title: "Wicked",
-        poster: "https://via.placeholder.com/300x450?text=Wicked",
-        description: "Musical / Fantasia – now no Prime Video.",
-        url: "#"
-      },
-      {
-        title: "Juror #2",
-        poster: "https://via.placeholder.com/300x450?text=Juror+%232",
-        description: "Mistério / Thriller – Apple TV Plus.",
-        url: "#"
-      },
-      {
-        title: "Twisters",
-        poster: "https://via.placeholder.com/300x450?text=Twisters",
-        description: "Drama / História – Prime Video ou Apple TV.",
-        url: "#"
-      }
-    ];
-
-    const container = document.getElementById('films');
-    films.forEach(f => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        <img src="${f.poster}" alt="Poster de ${f.title}">
-        <div class="card-content">
-          <h3>${f.title}</h3>
-          <p>${f.description}</p>
-          <button onclick="window.open('${f.url}','_blank')">Ver mais</button>
-        </div>`;
-      container.appendChild(card);
-    });
-  </script>
-</body>
-</html>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #121212;
+    color: #fff;
+  }
+  header {
+    background: #111;
+    color: #e50914;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+  header p {
+    color: #ccc;
+    font-size: 1rem;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+  .card {
+    background: #1e1e1e;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+  }
+  .card img {
+    width: 100%;
+    display: block;
+  }
+  .card-content {
+    padding: 1rem;
+  }
+  .card-content h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    color: #fff;
+  }
+  .card-content p {
+    margin: 0 0 1rem;
+    font-size: 0.85rem;
+    color: #ccc;
+  }
+  .card-content button {
+    background: #e50914;
+    color: #fff;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+  }
+  .card-content button:hover {
+    background: #f40612;
+  }
+</style>
