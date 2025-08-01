@@ -1,72 +1,378 @@
-<style>
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #121212;
-    color: #fff;
-  }
-  header {
-    background: #111;
-    color: #e50914;
-    padding: 2rem 1rem;
-    text-align: center;
-  }
-  header h1 {
-    margin: 0;
-    font-size: 2rem;
-    letter-spacing: 1px;
-  }
-  header p {
-    color: #ccc;
-    font-size: 1rem;
-  }
-  .container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 1rem;
-  }
-  .card {
-    background: #1e1e1e;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 10px rgba(255,255,255,0.2);
-  }
-  .card img {
-    width: 100%;
-    display: block;
-  }
-  .card-content {
-    padding: 1rem;
-  }
-  .card-content h3 {
-    margin: 0 0 0.5rem;
-    font-size: 1rem;
-    color: #fff;
-  }
-  .card-content p {
-    margin: 0 0 1rem;
-    font-size: 0.85rem;
-    color: #ccc;
-  }
-  .card-content button {
-    background: #e50914;
-    color: #fff;
-    border: none;
-    padding: 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-  }
-  .card-content button:hover {
-    background: #f40612;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lorito's Film Hub - Filmes Online</title>
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjMDAwIiByeD0iNCIvPgo8dGV4dCB4PSIxNiIgeT0iMjIiIGZpbGw9IiNlNTA5MTQiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkw8L3RleHQ+Cjwvc3ZnPgo=">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: #000;
+      color: #fff;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('https://i.imgur.com/unnamed.jpg') center/cover no-repeat;
+      z-index: -2;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at center, rgba(255,193,7,0.1) 0%, rgba(0,0,0,0.3) 70%),
+        linear-gradient(45deg, rgba(255,193,7,0.05) 0%, transparent 50%);
+      z-index: -1;
+    }
+
+    .header {
+      background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(26,26,26,0.85));
+      backdrop-filter: blur(15px);
+      padding: 40px 20px;
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 3px solid #e50914;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(229, 9, 20, 0.3);
+    }
+
+    .header h1 {
+      color: #e50914;
+      font-size: 3rem;
+      margin: 0;
+      text-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .header p {
+      font-size: 1.2rem;
+      margin: 10px 0 0 0;
+      color: #ddd;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    }
+
+    .section-title {
+      color: #fff;
+      font-size: 2rem;
+      margin: 40px 20px 25px 20px;
+      text-align: center;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(90deg, #e50914, #ff6b6b);
+      margin: 15px auto;
+      border-radius: 2px;
+      box-shadow: 0 2px 8px rgba(229, 9, 20, 0.4);
+    }
+
+    /* Estilos para filmes com cards */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      background-color: #111;
+      margin-bottom: 40px;
+    }
+
+    .video-card {
+      background: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px #000;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(229, 9, 20, 0.3);
+    }
+
+    .video-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .video-title {
+      color: #fff;
+      font-size: 1rem;
+      margin: 10px;
+    }
+
+    .watch-button {
+      background: #e50914;
+      color: white;
+      padding: 10px 20px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s ease;
+    }
+
+    .watch-button:hover {
+      background: #ff1f1f;
+      transform: scale(1.05);
+    }
+
+    /* Estilos para animações com iframes */
+    .video-grid-animacao {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      background: #0c0c0c;
+      margin-bottom: 40px;
+    }
+
+    .video-item-animacao {
+      background-color: #1a1a1a;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
+      transition: transform 0.3s ease;
+    }
+
+    .video-item-animacao:hover {
+      transform: scale(1.02);
+    }
+
+    .video-item-animacao iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .video-title-animacao {
+      color: #fff;
+      font-size: 1rem;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        margin: 20px 15px 15px 15px;
+      }
+
+      .video-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        padding: 15px;
+      }
+
+      .video-grid-animacao {
+        grid-template-columns: 1fr;
+        padding: 15px;
+      }
+
+      .video-item-animacao iframe {
+        height: 180px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .video-card img {
+        height: 140px;
+      }
+    }
+
+    .footer {
+      background: linear-gradient(135deg, rgba(26,26,26,0.95), rgba(17,17,17,0.95));
+      backdrop-filter: blur(10px);
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 60px;
+      color: #888;
+      border-top: 2px solid rgba(229, 9, 20, 0.3);
+    }
+
+    .footer p {
+      margin: 5px 0;
+    }
+
+    .footer p:first-child {
+      color: #e50914;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>🎬 LORITO'S FILM HUB</h1>
+    <p>Seus filmes favoritos em um só lugar</p>
+  </header>
+
+  <main>
+    <!-- Seção Terror -->
+    <h2 class="section-title">👻 Terror</h2>
+    <div class="video-grid">
+      <div class="video-card">
+        <img src="https://i.imgur.com/8zNmr6p.jpeg" alt="A Boneca Maldita">
+        <div class="video-title">A Boneca Maldita (2025)</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/15KutIBF-FeA7a8KO44zU4QyxtCbgSXGk/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+      <div class="video-card">
+        <img src="https://i.imgur.com/YsW4FTB.jpeg" alt="Terror na Escuridão">
+        <div class="video-title">Terror na Escuridão (2025)</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1drkW6iVduo9ggBpcak2gXqMR4X88qomN/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+      <div class="video-card">
+        <img src="https://i.imgur.com/HkzRMig.jpeg" alt="A Freira 1">
+        <div class="video-title">A Freira 1 (Terror Completo)</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1iER9m11eGzd3fe41oRuCWqaj385icSE0/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+      <div class="video-card">
+        <img src="https://i.imgur.com/Tt5ohxh.jpeg" alt="A Freira do Mal 3">
+        <div class="video-title">A Freira do Mal 3 (2024)</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1QZkZAa0WN6aCwGeXRUubYSeap_LXZWeF/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+      <div class="video-card">
+        <img src="https://i.imgur.com/5EBj5TO.jpeg" alt="A Freira 2">
+        <div class="video-title">A Freira 2 (2018)</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1Jb8eVG0HHZJiMbXSK5yXYZ4QGZ4F6Wde/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+      <div class="video-card">
+        <img src="https://i.imgur.com/h5rIo7Z.jpeg" alt="A Criança do Diabo">
+        <div class="video-title">A Criança do Diabo</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1DXGGHltcSo2s6Koxvb-Oj8LPFSEyrgnN/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+    </div>
+
+    <!-- Seção Ficção Científica -->
+    <h2 class="section-title">🚀 Ficção Científica</h2>
+    <div class="video-grid">
+      <!-- Adicionar filmes de ficção científica aqui -->
+    </div>
+
+    <!-- Seção Ação -->
+    <h2 class="section-title">💥 Ação</h2>
+    <div class="video-grid">
+      <div class="video-card">
+        <img src="https://via.placeholder.com/300x160/444/fff?text=Juiz+Implacável" alt="Juiz Implacável">
+        <div class="video-title">Um juiz implacável destrói criminosos em uma cidade futurista</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1PdxVvxZsnMumiQHNaZCCsYQC4P4S990J/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+      <div class="video-card">
+        <img src="https://via.placeholder.com/300x160/444/fff?text=Samuel+L.+Jackson" alt="Samuel L. Jackson - 20 Anos">
+        <div class="video-title">Samuel L. Jackson - Ele ficou preso por 20 anos sem motivos</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1ftpAdMM85oXIBmovwUhUa_ZjoHp-gOtL/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+      <div class="video-card">
+        <img src="https://via.placeholder.com/300x160/444/fff?text=November+Man" alt="November Man">
+        <div class="video-title">November Man: Um Espião Nunca Morre (2014)</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1Zq98i4iGnK7tIA5QD2oh3Gn-GWryWu6r/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+      <div class="video-card">
+        <img src="https://via.placeholder.com/300x160/444/fff?text=As+Nove+Portas" alt="As Nove Portas">
+        <div class="video-title">Johnny Depp vs Forças das Trevas - As Nove Portas</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1S7JxWV-hAn30HdVthCRU7qx8r4cv-9Fi/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+      <div class="video-card">
+        <img src="https://via.placeholder.com/300x160/444/fff?text=Fuga+Sem+Limites" alt="Fuga Sem Limites">
+        <div class="video-title">Fuga Sem Limites - Suspense Policial</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1O3nZW6hER4l0X_-scCMb_q9zLTXuoG7W/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+    </div>
+
+    <!-- Seção Romance -->
+    <h2 class="section-title">💕 Romance</h2>
+    <div class="video-grid">
+      <div class="video-card">
+        <img src="https://via.placeholder.com/300x160/ff69b4/fff?text=Um+Lugar+Para+Voltar" alt="Um Lugar Para Voltar">
+        <div class="video-title">Um Lugar Para Voltar - Aventura/Drama</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1My2LgOESxsT3Y73ovM7jXofjTsOr37uy/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+      <div class="video-card">
+        <img src="https://via.placeholder.com/300x160/ff69b4/fff?text=Romance+Proibido" alt="Romance Proibido">
+        <div class="video-title">Ela o Seduziu... Depois o Acusou! Romance Proibido</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1ZecJhvYvjizHN9qmDvPzvL-O_y8lHB-E/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+      <div class="video-card">
+        <img src="https://via.placeholder.com/300x160/ff69b4/fff?text=Casa+Comigo+Cara" alt="Casa Comigo, Cara">
+        <div class="video-title">Casa Comigo, Cara - Comédia Romântica</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1Xkf57SISjnF-3qEhmhU4xqDdekVxdDaW/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+    </div>
+
+    <!-- Seção Suspense -->
+    <h2 class="section-title">🎯 Suspense</h2>
+    <div class="video-grid">
+      <div class="video-card">
+        <img src="https://i.imgur.com/y3NOoRi.jpeg" alt="Diversão Mortal">
+        <div class="video-title">Diversão Mortal (2025)</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/112t_TAp-nPeYtiUWV8AaC_dxzPPglXJl/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+      <div class="video-card">
+        <img src="https://i.imgur.com/kqZ6yLy.jpeg" alt="Ela Foi Caçar">
+        <div class="video-title">Ela Foi Caçar e Virou a Caçada</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1LX8QJkct_-3tjY6hHxhjbVhIHtuxM5x0/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+      <div class="video-card">
+        <img src="https://i.imgur.com/zVoG0H6.jpeg" alt="Palhaço Macabro">
+        <div class="video-title">O Retorno do Palhaço Macabro</div>
+        <a class="watch-button" href="https://drive.google.com/file/d/1sf1E3HRkdnJUhKo8wOf3onEBS4noEopY/view" target="_blank" rel="noopener">Assistir</a>
+      </div>
+    </div>
+
+    <!-- Seção de Animações -->
+    <h2 class="section-title">🎨 Animações</h2>
+    <section class="video-grid-animacao">
+      <div class="video-item-animacao">
+        <iframe src="https://drive.google.com/file/d/1TqBbXLUGwlhEd5mUW31asw4H2XIHdUun/preview" allowfullscreen="true"></iframe>
+        <div class="video-title-animacao">A Jornada de Khumba muda tudo ao redor!</div>
+      </div>
+      <div class="video-item-animacao">
+        <iframe src="https://drive.google.com/file/d/1nelShntok7UMBUROvGkEOdqiwcUAhTlV/preview" allowfullscreen="true"></iframe>
+        <div class="video-title-animacao">O Reino dos Elfos - Filme Completo</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Lorito's Film Hub - Todos os direitos reservados</p>
+    <p>Plataforma de entretenimento digital premium</p>
+  </footer>
+</body>
+</html>
